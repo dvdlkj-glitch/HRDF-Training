@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claim Your HRDF — Don't Let It Go to Waste</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#0a2f2a;
+    --forest-2:#10403a;
+    --teal:#0f5f57;
+    --emerald:#1f9d57;
+    --lime:#8dc63f;
+    --lime-bright:#b6e84a;
+    --cream:#f4f7f0;
+    --ink:#0c241f;
+    --card:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:"Manrope",sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(120% 80% at 80% 0%, #14543b 0%, transparent 55%),
+      linear-gradient(160deg, var(--forest-2), var(--forest));
+    padding:48px 20px 70px;
+    text-align:center;overflow:hidden;
+  }
+  .hero .glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+  .hero .glow.a{width:360px;height:360px;background:var(--lime);top:-120px;left:-100px;opacity:.25;}
+  .hero .glow.b{width:360px;height:360px;background:var(--emerald);bottom:-140px;right:-120px;opacity:.3;}
+
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;color:var(--lime-bright);
+    font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:13px;
+    border:1px solid rgba(182,232,74,.4);padding:8px 16px;border-radius:999px;margin-bottom:24px;
+    animation:rise .7s ease both;
+  }
+  .hero-eyebrow .pulse{width:8px;height:8px;border-radius:50%;background:var(--lime-bright);
+    box-shadow:0 0 0 0 rgba(182,232,74,.7);animation:pulse 1.8s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(182,232,74,.6);}70%{box-shadow:0 0 0 12px rgba(182,232,74,0);}100%{box-shadow:0 0 0 0 rgba(182,232,74,0);}}
+
+  .poster-wrap{position:relative;max-width:680px;margin:0 auto;z-index:2;
+    animation:rise .8s .1s ease both;}
+  .poster-wrap img{width:100%;display:block;border-radius:22px;
+    box-shadow:0 30px 90px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.1);}
+  .poster-wrap{animation:rise .8s .1s ease both, float 6s ease-in-out 1s infinite;}
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+  .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px;z-index:2;position:relative;
+    animation:rise .8s .3s ease both;}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:17px;
+    padding:16px 28px;border-radius:14px;text-decoration:none;border:none;cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease;font-family:"Manrope";}
+  .btn:hover{transform:translateY(-3px);}
+  .btn-wa{background:#25d366;color:#063b1e;box-shadow:0 14px 30px rgba(37,211,102,.35);}
+  .btn-wa:hover{box-shadow:0 18px 40px rgba(37,211,102,.5);}
+  .btn-ghost{background:rgba(255,255,255,.08);color:var(--cream);border:1px solid rgba(255,255,255,.25);}
+  .btn-ghost:hover{background:rgba(255,255,255,.16);}
+  .btn svg{width:22px;height:22px;}
+
+  .scroll-cue{margin-top:40px;color:rgba(244,247,240,.55);font-size:13px;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;animation:bob 2s ease-in-out infinite;z-index:2;position:relative;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:70px 20px;}
+  .wrap{max-width:1040px;margin:0 auto;}
+  .sec-head{text-align:center;margin-bottom:44px;}
+  .sec-head .tag{color:var(--emerald);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:13px;}
+  .sec-head h2{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(30px,5vw,46px);
+    line-height:1.04;margin-top:10px;color:var(--ink);}
+  .sec-head p{margin-top:14px;color:#4d6b5f;font-size:18px;max-width:560px;margin-left:auto;margin-right:auto;}
+
+  /* ---------- FAQ ACCORDION ---------- */
+  .faq{display:grid;gap:14px;}
+  .faq-item{background:var(--card);border:1px solid #e3ece0;border-radius:18px;overflow:hidden;
+    box-shadow:0 4px 16px rgba(10,47,42,.04);transition:box-shadow .25s ease, border-color .25s ease;}
+  .faq-item.open{box-shadow:0 16px 40px rgba(31,157,87,.14);border-color:var(--lime);}
+  .faq-q{display:flex;align-items:center;gap:18px;padding:22px 24px;cursor:pointer;user-select:none;}
+  .faq-icon{width:48px;height:48px;flex-shrink:0;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,var(--emerald),var(--teal));color:#fff;}
+  .faq-icon svg{width:24px;height:24px;}
+  .faq-q .title{flex:1;font-family:"Bricolage Grotesque";font-weight:700;font-size:21px;color:var(--ink);}
+  .faq-toggle{width:34px;height:34px;border-radius:50%;background:#eef4ea;display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;transition:transform .3s ease, background .3s ease;font-size:22px;color:var(--emerald);font-weight:700;}
+  .faq-item.open .faq-toggle{transform:rotate(45deg);background:var(--lime);color:#0a2f2a;}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+  .faq-a .inner{padding:0 24px 24px 90px;color:#46645a;font-size:16px;line-height:1.6;}
+  .faq-a .inner strong{color:var(--emerald);}
+  @media(max-width:560px){.faq-a .inner{padding-left:24px;}}
+
+  /* ---------- ELIGIBILITY CHECKER ---------- */
+  .checker{background:linear-gradient(150deg,var(--forest-2),var(--forest));border-radius:26px;
+    padding:48px 40px;color:var(--cream);position:relative;overflow:hidden;}
+  .checker .glow{position:absolute;width:300px;height:300px;border-radius:50%;background:var(--emerald);
+    filter:blur(80px);opacity:.3;bottom:-120px;right:-80px;}
+  .checker h3{font-family:"Bricolage Grotesque";font-weight:800;font-size:30px;text-align:center;position:relative;}
+  .checker .sub{text-align:center;color:rgba(244,247,240,.7);margin-top:8px;font-size:16px;position:relative;}
+  .quiz{margin-top:34px;position:relative;}
+  .q-step{display:none;}
+  .q-step.active{display:block;animation:fade .4s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  .q-step .qtext{font-family:"Bricolage Grotesque";font-weight:700;font-size:24px;text-align:center;margin-bottom:22px;}
+  .opts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .opt{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:var(--cream);
+    padding:16px 34px;border-radius:14px;font-weight:700;font-size:17px;cursor:pointer;
+    transition:all .2s ease;font-family:"Manrope";}
+  .opt:hover{background:var(--lime);color:#0a2f2a;border-color:var(--lime);transform:translateY(-3px);}
+  .progress{display:flex;gap:8px;justify-content:center;margin-bottom:26px;}
+  .pdot{width:36px;height:5px;border-radius:3px;background:rgba(255,255,255,.18);transition:background .3s;}
+  .pdot.on{background:var(--lime);}
+  .result{display:none;text-align:center;animation:fade .5s ease;}
+  .result.show{display:block;}
+  .result .big{font-family:"Bricolage Grotesque";font-weight:800;font-size:34px;color:var(--lime-bright);}
+  .result p{margin:14px auto 26px;max-width:440px;color:rgba(244,247,240,.85);font-size:17px;line-height:1.55;}
+  .result .restart{background:none;border:none;color:rgba(244,247,240,.6);text-decoration:underline;cursor:pointer;
+    font-size:14px;margin-top:18px;font-family:"Manrope";}
+
+  /* ---------- FINAL CTA ---------- */
+  .final{background:var(--forest);text-align:center;padding:80px 20px;position:relative;overflow:hidden;}
+  .final .glow{position:absolute;width:400px;height:400px;border-radius:50%;background:var(--lime);
+    filter:blur(100px);opacity:.18;top:-150px;left:50%;transform:translateX(-50%);}
+  .final h2{font-family:"Bricolage Grotesque";font-weight:800;color:#fff;font-size:clamp(32px,6vw,56px);
+    line-height:1;position:relative;}
+  .final h2 span{color:var(--lime-bright);}
+  .final p{color:rgba(244,247,240,.75);font-size:19px;margin-top:16px;position:relative;}
+  .final .hero-cta{margin-top:36px;}
+  /* ========== FEATURED PROGRAMME SECTIONS ========== */
+  .prog{background:
+      radial-gradient(120% 70% at 15% 0%, rgba(31,157,87,.06), transparent 60%),
+      var(--cream);}
+  .spotlight{position:relative;overflow:hidden;border-radius:30px;
+    background:linear-gradient(150deg,var(--forest-2),var(--forest));
+    color:var(--cream);padding:clamp(30px,5vw,56px);
+    box-shadow:0 30px 80px rgba(7,40,28,.28);}
+  .spotlight .glow{position:absolute;width:420px;height:420px;border-radius:50%;
+    background:var(--lime);filter:blur(90px);opacity:.22;top:-160px;right:-120px;pointer-events:none;}
+  .spot-flag{display:inline-flex;align-items:center;gap:9px;font-weight:800;font-size:12.5px;
+    letter-spacing:.16em;text-transform:uppercase;color:#0a2f2a;
+    background:var(--lime-bright);padding:7px 15px;border-radius:999px;}
+  .spot-flag .dot{width:8px;height:8px;border-radius:50%;background:#0a2f2a;animation:pulse 1.8s infinite;}
+  .spotlight h2{font-family:"Bricolage Grotesque";font-weight:800;line-height:1.03;
+    font-size:clamp(30px,5.2vw,52px);margin:20px 0 6px;}
+  .spotlight h2 span{color:var(--lime-bright);}
+  .spot-sub{font-size:clamp(16px,2.4vw,20px);color:rgba(244,247,240,.82);max-width:680px;}
+  .spot-chips{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 6px;}
+  .chip{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+    color:var(--cream);padding:9px 15px;border-radius:12px;}
+  .chip b{color:var(--lime-bright);}
+  .spotlight .hero-cta{margin-top:28px;justify-content:flex-start;}
+
+  /* outcome cards */
+  .outcome-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .ocard{background:var(--card);border:1px solid #e4ece2;border-radius:20px;padding:26px 22px;
+    box-shadow:0 10px 30px rgba(31,157,87,.07);transition:transform .25s ease,box-shadow .25s ease;}
+  .ocard:hover{transform:translateY(-6px);box-shadow:0 20px 44px rgba(31,157,87,.16);border-color:var(--lime);}
+  .ocard .ico{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;
+    background:linear-gradient(150deg,var(--emerald),var(--teal));margin-bottom:16px;}
+  .ocard .ico svg{width:28px;height:28px;fill:#fff;}
+  .ocard h4{font-size:17px;font-weight:800;color:var(--ink);margin-bottom:7px;line-height:1.2;}
+  .ocard p{font-size:14.5px;color:#54705f;line-height:1.5;}
+
+  /* before / after */
+  .ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .ba-col{border-radius:22px;padding:28px 26px;}
+  .ba-col.before{background:#fbeeee;border:1px solid #f3d6d6;}
+  .ba-col.after{background:#ecf7ef;border:1px solid #cfe9d6;}
+  .ba-col h4{font-family:"Bricolage Grotesque";font-weight:800;font-size:20px;margin-bottom:18px;display:flex;align-items:center;gap:9px;}
+  .ba-col.before h4{color:#b4453d;}
+  .ba-col.after h4{color:#15803d;}
+  .ba-row{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-top:1px solid rgba(0,0,0,.06);font-size:15px;line-height:1.45;color:#3c5249;}
+  .ba-row:first-of-type{border-top:none;}
+  .ba-mark{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:900;color:#fff;margin-top:1px;}
+  .ba-col.before .ba-mark{background:#d35850;}
+  .ba-col.after .ba-mark{background:#1f9d57;}
+  .ba-row b{color:var(--ink);}
+
+  /* level / roadmap accordion */
+  .levels{display:flex;flex-direction:column;gap:16px;}
+  .level{background:var(--card);border:1px solid #e4ece2;border-radius:20px;overflow:hidden;
+    box-shadow:0 8px 26px rgba(31,157,87,.06);transition:border-color .2s ease;}
+  .level.open{border-color:var(--lime);box-shadow:0 18px 44px rgba(31,157,87,.14);}
+  .level-head{display:flex;align-items:center;gap:18px;padding:22px 24px;cursor:pointer;}
+  .level-num{flex:none;width:54px;height:54px;border-radius:15px;display:grid;place-items:center;
+    font-family:"Bricolage Grotesque";font-weight:800;font-size:22px;color:#fff;
+    background:linear-gradient(150deg,var(--emerald),var(--forest-2));}
+  .level-head .lt{flex:1;}
+  .level-head .lt h4{font-size:18px;font-weight:800;color:var(--ink);line-height:1.2;}
+  .level-head .lt p{font-size:14px;color:#6a8377;margin-top:3px;}
+  .level-tog{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+    background:#eef4ec;color:var(--emerald);font-size:22px;font-weight:700;transition:transform .25s ease,background .25s ease;}
+  .level.open .level-tog{transform:rotate(45deg);background:var(--lime);color:#0a2f2a;}
+  .level-body{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+  .level-inner{padding:0 24px 26px;}
+  .level-inner .lbl{font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--emerald);margin:6px 0 12px;}
+  .pills{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:20px;}
+  .pill{font-size:13.5px;font-weight:600;color:#2c4438;background:#eef4ec;border:1px solid #d7e6d6;padding:7px 13px;border-radius:10px;}
+  .help{display:flex;gap:12px;background:linear-gradient(150deg,rgba(141,198,63,.12),rgba(31,157,87,.08));
+    border:1px solid #d7e6d6;border-radius:14px;padding:16px 18px;}
+  .help svg{flex:none;width:22px;height:22px;fill:var(--emerald);margin-top:1px;}
+  .help p{font-size:14.5px;color:#3c5249;line-height:1.5;}
+  .help b{color:var(--ink);}
+
+  /* method + logistics */
+  .info-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:22px;align-items:start;}
+  .panel{background:var(--card);border:1px solid #e4ece2;border-radius:22px;padding:30px 28px;box-shadow:0 10px 30px rgba(31,157,87,.07);}
+  .panel h3{font-family:"Bricolage Grotesque";font-weight:800;font-size:22px;color:var(--ink);margin-bottom:6px;}
+  .panel .psub{font-size:14.5px;color:#6a8377;margin-bottom:20px;}
+  .method-row{display:flex;gap:14px;padding:14px 0;border-top:1px solid #eef2ec;}
+  .method-row:first-of-type{border-top:none;}
+  .method-row .mn{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-weight:800;color:#fff;background:linear-gradient(150deg,var(--emerald),var(--teal));font-size:15px;}
+  .method-row h5{font-size:15.5px;font-weight:800;color:var(--ink);}
+  .method-row p{font-size:13.5px;color:#5f7a6c;margin-top:2px;line-height:1.45;}
+  .dpanel{background:linear-gradient(150deg,var(--forest-2),var(--forest));color:var(--cream);}
+  .dpanel h3{color:#fff;}
+  .dpanel .psub{color:rgba(244,247,240,.7);}
+  .drow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px 0;border-top:1px solid rgba(255,255,255,.12);}
+  .drow:first-of-type{border-top:none;}
+  .drow .k{display:flex;align-items:center;gap:11px;font-size:14.5px;color:rgba(244,247,240,.82);}
+  .drow .k svg{width:20px;height:20px;fill:var(--lime-bright);}
+  .drow .v{font-weight:800;font-size:15px;color:#fff;}
+  .who{margin-top:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:16px 18px;}
+  .who .lbl{font-weight:800;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--lime-bright);margin-bottom:8px;}
+  .who p{font-size:14px;color:rgba(244,247,240,.85);line-height:1.5;}
+
+  /* upcoming */
+  .up-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .ucard{background:var(--card);border:1px solid #e4ece2;border-radius:20px;padding:26px 24px;position:relative;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease;}
+  .ucard:hover{transform:translateY(-6px);box-shadow:0 20px 44px rgba(31,157,87,.14);}
+  .ucard.feat{background:linear-gradient(150deg,var(--forest-2),var(--forest));color:var(--cream);border:none;}
+  .ucard .utag{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:999px;margin-bottom:14px;}
+  .ucard .utag.live{background:var(--lime-bright);color:#0a2f2a;}
+  .ucard .utag.soon{background:#eef4ec;color:var(--emerald);}
+  .ucard h4{font-size:18px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+  .ucard .umeta{font-size:13.5px;line-height:1.5;}
+  .ucard.feat .umeta{color:rgba(244,247,240,.78);}
+  .ucard:not(.feat) .umeta{color:#5f7a6c;}
+  .ucard .ulink{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-weight:800;font-size:14px;text-decoration:none;}
+  .ucard.feat .ulink{color:var(--lime-bright);}
+  .ucard:not(.feat) .ulink{color:var(--emerald);}
+
+  @media(max-width:880px){
+    .outcome-grid{grid-template-columns:repeat(2,1fr);}
+    .info-grid{grid-template-columns:1fr;}
+    .up-grid{grid-template-columns:1fr;}
+  }
+  @media(max-width:720px){
+    section{padding:54px 18px;}
+  }
+  @media(max-width:560px){
+    section{padding:44px 16px;}
+    .hero{padding:34px 16px 52px;}
+    .hero-eyebrow{font-size:11px;letter-spacing:.12em;padding:7px 13px;margin-bottom:18px;}
+    /* full-width, easy-to-tap buttons */
+    .hero-cta{gap:10px;}
+    .hero-cta .btn{flex:1 1 100%;justify-content:center;font-size:16px;padding:15px 20px;}
+    .scroll-cue{margin-top:28px;}
+    .sec-head{margin-bottom:32px;}
+    .sec-head p{font-size:16px;}
+    /* outcomes + before/after stack */
+    .outcome-grid{grid-template-columns:1fr;}
+    .ba-grid{grid-template-columns:1fr;}
+    .ocard{padding:22px 20px;}
+    .ba-col{padding:24px 20px;}
+    /* spotlight */
+    .spotlight{border-radius:22px;}
+    .spotlight .hero-cta{flex-direction:column;}
+    .chip{font-size:13px;padding:8px 12px;}
+    /* roadmap */
+    .level-head{gap:12px;padding:16px;}
+    .level-num{width:46px;height:46px;font-size:19px;border-radius:13px;}
+    .level-head .lt h4{font-size:16px;}
+    .level-inner{padding:0 16px 22px;}
+    /* methodology + details panels */
+    .panel{padding:24px 20px;}
+    .drow{flex-wrap:wrap;gap:4px 12px;}
+    /* FAQ */
+    .faq-q{padding:18px;gap:13px;}
+    .faq-q .title{font-size:18px;}
+    .faq-icon{width:42px;height:42px;}
+    .faq-icon svg{width:21px;height:21px;}
+    /* eligibility checker */
+    .checker{padding:32px 20px;border-radius:22px;}
+    .checker h3{font-size:25px;}
+    .q-step .qtext{font-size:20px;}
+    .opt{padding:14px 24px;font-size:16px;}
+    .result .big{font-size:28px;}
+    /* sticky button a touch smaller, clear of content */
+    .sticky-wa{width:54px;height:54px;bottom:16px;right:16px;}
+    .sticky-wa svg{width:28px;height:28px;}
+  }
+  @media(max-width:400px){
+    .spotlight h2{font-size:27px;}
+    .sec-head h2{font-size:26px;}
+    .opts{flex-direction:column;}
+    .opt{width:100%;}
+  }
+
+  .badge-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:42px;position:relative;}
+  .tbadge{font-size:13px;font-weight:700;color:rgba(244,247,240,.8);background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);padding:8px 16px;border-radius:999px;}
+
+  /* ---------- STICKY WA ---------- */
+  .sticky-wa{position:fixed;bottom:24px;right:24px;z-index:50;width:62px;height:62px;border-radius:50%;
+    background:#25d366;display:flex;align-items:center;justify-content:center;text-decoration:none;
+    box-shadow:0 10px 30px rgba(37,211,102,.5);animation:wapulse 2.4s infinite;transition:transform .2s;}
+  .sticky-wa:hover{transform:scale(1.08);}
+  .sticky-wa svg{width:32px;height:32px;}
+  @keyframes wapulse{0%{box-shadow:0 10px 30px rgba(37,211,102,.5),0 0 0 0 rgba(37,211,102,.5);}
+    70%{box-shadow:0 10px 30px rgba(37,211,102,.5),0 0 0 18px rgba(37,211,102,0);}
+    100%{box-shadow:0 10px 30px rgba(37,211,102,.5),0 0 0 0 rgba(37,211,102,0);}}
+
+  /* scroll reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  @keyframes rise{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="glow a"></div><div class="glow b"></div>
+    <div class="hero-eyebrow"><span class="pulse"></span>HRD Corp Registered Provider · 100% Claimable</div>
+    <div class="poster-wrap">
+      <img src="poster.png" alt="It's time to claim your HRDF — don't let your funds go to waste">
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-wa" href="https://wa.me/60123456789?text=Hi%2C%20I%27d%20like%20to%20know%20how%20to%20claim%20my%20HRDF" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.8.7.8-2.7-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5s-.5-1.3-.7-1.7-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3A3 3 0 0 0 6.5 10a5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.6 4c.6.3 1.1.4 1.5.6a3.5 3.5 0 0 0 1.6.1 2.7 2.7 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3z"/></svg>
+        Ask us on WhatsApp
+      </a>
+      <a class="btn btn-ghost" href="#program">See the featured programme ↓</a>
+    </div>
+    <div class="scroll-cue">Scroll to explore ↓</div>
+  </header>
+
+  <!-- FEATURED PROGRAMME SPOTLIGHT -->
+  <section class="prog" id="program">
+    <div class="wrap">
+      <div class="spotlight reveal">
+        <div class="glow"></div>
+        <span class="spot-flag"><span class="dot"></span>What's New · Featured Programme</span>
+        <h2>Excel Operational Excellence<br><span>Transform daily work through Excel mastery.</span></h2>
+        <p class="spot-sub">A 2-day intermediate, hands-on programme that re-engineers how your team handles data — turning manual, error-prone routines into fast, automated, decision-ready workflows. <strong>100% HRDF-claimable.</strong></p>
+        <div class="spot-chips">
+          <span class="chip"><b>2</b> intensive days</span>
+          <span class="chip">9:00 AM – 5:00 PM</span>
+          <span class="chip">In-house training</span>
+          <span class="chip">Admin · HR · Finance · Operations</span>
+          <span class="chip"><b>100%</b> claimable</span>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-wa" href="https://wa.me/60123456789?text=Hi%2C%20I%27d%20like%20to%20book%20the%202-day%20Excel%20Operational%20Excellence%20programme%20using%20our%20HRDF%20levy" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2z"/></svg>
+            Book this programme
+          </a>
+          <a class="btn btn-ghost" href="#curriculum">Explore what you'll learn ↓</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGH-LEVEL SUMMARY / OUTCOMES -->
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="tag">The big picture</div>
+        <h2>What your team will walk away able to do</h2>
+        <p>Four core capabilities that put hours back into every week.</p>
+      </div>
+      <div class="outcome-grid reveal">
+        <div class="ocard">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3C7 3 3 4.8 3 7s4 4 9 4 9-1.8 9-4-4-4-9-4zM3 9.5V12c0 2.2 4 4 9 4s9-1.8 9-4V9.5c0 2.2-4 4-9 4s-9-1.8-9-4zm0 5V17c0 2.2 4 4 9 4s9-1.8 9-4v-2.5c0 2.2-4 4-9 4s-9-1.8-9-4z"/></svg></div>
+          <h4>Master large data sets</h4>
+          <p>Manage, structure and summarise big spreadsheets with precision instead of endless scrolling.</p>
+        </div>
+        <div class="ocard">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5zm0 7.2L5.7 6 12 4.2 18.3 6 12 9.2zM2 12l10 5 10-5-2.3-1.1L12 14.6 4.3 10.9 2 12zm0 5 10 5 10-5-2.3-1.1L12 19.6 4.3 15.9 2 17z"/></svg></div>
+          <h4>Combine data across files</h4>
+          <p>Map and securely merge data from multiple disparate Excel files using lookups and logical mapping.</p>
+        </div>
+        <div class="ocard">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 3v18h18v-2H5V3H3zm4 12h2V9H7v6zm4 0h2V6h-2v9zm4 0h2v-4h-2v4z"/></svg></div>
+          <h4>Build clear reports</h4>
+          <p>Prepare comprehensive, easily digestible reports with dynamic pivot tables and professional charts.</p>
+        </div>
+        <div class="ocard">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 10.4V6h-2v7l5.2 3.1 1-1.7-4.2-2z"/></svg></div>
+          <h4>Finish routines faster</h4>
+          <p>Rapidly complete mandatory daily and monthly tasks that used to eat up hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE / AFTER -->
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="tag">The transformation</div>
+        <h2>From operational drag to strategic speed</h2>
+        <p>The same four tasks — before and after the programme.</p>
+      </div>
+      <div class="ba-grid reveal">
+        <div class="ba-col before">
+          <h4>Today, without training</h4>
+          <div class="ba-row"><span class="ba-mark">✕</span><span><b>Data navigation:</b> manual scrolling and sorting.</span></div>
+          <div class="ba-row"><span class="ba-mark">✕</span><span><b>File consolidation:</b> error-prone copy &amp; paste across multiple files.</span></div>
+          <div class="ba-row"><span class="ba-mark">✕</span><span><b>Reporting:</b> static tables requiring daily manual updates.</span></div>
+          <div class="ba-row"><span class="ba-mark">✕</span><span><b>Execution speed:</b> hours spent on routine monthly tasks.</span></div>
+        </div>
+        <div class="ba-col after">
+          <h4>After, post-training</h4>
+          <div class="ba-row"><span class="ba-mark">✓</span><span><b>Data navigation:</b> instant structuring via Tables and Flash Fill.</span></div>
+          <div class="ba-row"><span class="ba-mark">✓</span><span><b>File consolidation:</b> automated lookups (XLOOKUP) and logical mapping.</span></div>
+          <div class="ba-row"><span class="ba-mark">✓</span><span><b>Reporting:</b> dynamic Pivot Tables and comprehensive chart visuals.</span></div>
+          <div class="ba-row"><span class="ba-mark">✓</span><span><b>Execution speed:</b> rapid completion of daily and monthly routines.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEEP DIVE: CAPABILITY ROADMAP -->
+  <section style="padding-top:0;" id="curriculum">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="tag">Deep dive · The capability roadmap</div>
+        <h2>What you'll learn, level by level</h2>
+        <p>Each level builds on the last — raw data-entry skills grow into a full analytical workflow. Tap a level to see the detail.</p>
+      </div>
+      <div class="levels reveal" id="levels"></div>
+    </div>
+  </section>
+
+  <!-- METHODOLOGY + LOGISTICS -->
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="info-grid reveal">
+        <div class="panel">
+          <h3>How the learning sticks</h3>
+          <p class="psub">The Competency Activation Cycle — built so skills transfer to real work, not just slides.</p>
+          <div class="method-row"><span class="mn">1</span><div><h5>Lectures (Theory)</h5><p>Establishing the operational framework and the logic behind each tool.</p></div></div>
+          <div class="method-row"><span class="mn">2</span><div><h5>Practical Sessions (Application)</h5><p>Guided, hands-on implementation of the tools on real spreadsheets.</p></div></div>
+          <div class="method-row"><span class="mn">3</span><div><h5>Exercise (Repetition)</h5><p>Independent, scenario-based problem solving to build muscle memory.</p></div></div>
+          <div class="method-row"><span class="mn">4</span><div><h5>Post Assessment (Validation)</h5><p>Confirming retention and capability mastery before the team returns to work.</p></div></div>
+        </div>
+        <div class="panel dpanel">
+          <h3>Programme details</h3>
+          <p class="psub">Everything you need to plan the booking.</p>
+          <div class="drow"><span class="k"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4V4zm0 6h16v10H4V10zm3 3v4h4v-4H7z"/></svg>Format</span><span class="v">In-house training</span></div>
+          <div class="drow"><span class="k"><svg viewBox="0 0 24 24"><path d="M7 2v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7zM5 9h14v11H5V9z"/></svg>Duration</span><span class="v">2 intensive days</span></div>
+          <div class="drow"><span class="k"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 10.4V6h-2v7l5.2 3.1 1-1.7-4.2-2z"/></svg>Time</span><span class="v">9:00 AM – 5:00 PM</span></div>
+          <div class="drow"><span class="k"><svg viewBox="0 0 24 24"><path d="M9 11a3 3 0 1 0-3-3 3 3 0 0 0 3 3zm6 0a3 3 0 1 0-3-3 3 3 0 0 0 3 3zm-6 2c-2.7 0-6 1.3-6 4v2h8v-2a4.7 4.7 0 0 1 1.3-3A9.6 9.6 0 0 0 9 13zm6 0-.7.05A5.5 5.5 0 0 1 17 17v2h4v-2c0-2.7-3.3-4-6-4z"/></svg>Level</span><span class="v">Intermediate</span></div>
+          <div class="drow"><span class="k"><svg viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5l-9-4zm-1 14-4-4 1.4-1.4L11 12.2l4.6-4.6L17 9l-6 6z"/></svg>Funding</span><span class="v">100% HRDF-claimable</span></div>
+          <div class="who">
+            <div class="lbl">Who should attend</div>
+            <p>Specifically designed for Admin, HR, Finance personnel and core Operations teams who interact with data daily.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPCOMING / WHAT'S COMING -->
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="tag">What's coming up</div>
+        <h2>Plan your levy across the year</h2>
+        <p>Start with Excel mastery, then keep developing your team with more claimable programmes.</p>
+      </div>
+      <div class="up-grid reveal">
+        <div class="ucard feat">
+          <span class="utag live">Now enrolling</span>
+          <h4>Excel Operational Excellence</h4>
+          <p class="umeta">2-day intermediate · Admin, HR, Finance &amp; Operations · the flagship programme above.</p>
+          <a class="ulink" href="#program">View programme →</a>
+        </div>
+        <div class="ucard">
+          <span class="utag soon">Coming soon</span>
+          <h4>Advanced Excel &amp; Dashboards</h4>
+          <p class="umeta">Power Query, advanced functions and interactive dashboards for power users ready to go further.</p>
+          <a class="ulink" href="https://wa.me/60123456789?text=Hi%2C%20please%20tell%20me%20when%20the%20Advanced%20Excel%20%26%20Dashboards%20programme%20is%20scheduled" target="_blank" rel="noopener">Register interest →</a>
+        </div>
+        <div class="ucard">
+          <span class="utag soon">Coming soon</span>
+          <h4>Team Building &amp; Soft Skills</h4>
+          <p class="umeta">Experiential, claimable programmes that lift morale while developing real workplace skills.</p>
+          <a class="ulink" href="https://wa.me/60123456789?text=Hi%2C%20I%27d%20like%20to%20hear%20about%20upcoming%20team%20building%20%26%20soft%20skills%20programmes" target="_blank" rel="noopener">Register interest →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE FAQ -->
+  <section id="questions">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="tag">Questions you might have</div>
+        <h2>Tap a question. Get a straight answer.</h2>
+        <p>The six things companies ask us most about their HRDF levy — answered.</p>
+      </div>
+      <div class="faq" id="faq"></div>
+    </div>
+  </section>
+
+  <!-- ELIGIBILITY CHECKER -->
+  <section style="padding-top:0;">
+    <div class="wrap reveal">
+      <div class="checker">
+        <div class="glow"></div>
+        <h3>60-Second Claim Check</h3>
+        <p class="sub">Three quick taps to see if you've got HRDF sitting unused.</p>
+        <div class="quiz" id="quiz">
+          <div class="progress">
+            <span class="pdot on"></span><span class="pdot"></span><span class="pdot"></span>
+          </div>
+
+          <div class="q-step active" data-step="0">
+            <div class="qtext">Do you have Malaysian employees on payroll?</div>
+            <div class="opts"><button class="opt" data-v="yes">Yes</button><button class="opt" data-v="no">No</button></div>
+          </div>
+          <div class="q-step" data-step="1">
+            <div class="qtext">Is your company registered & paying the HRD Corp levy?</div>
+            <div class="opts"><button class="opt" data-v="yes">Yes</button><button class="opt" data-v="no">Not sure</button></div>
+          </div>
+          <div class="q-step" data-step="2">
+            <div class="qtext">Have you used up your full levy balance this year?</div>
+            <div class="opts"><button class="opt" data-v="no">Not yet</button><button class="opt" data-v="yes">All used</button></div>
+          </div>
+
+          <div class="result" id="result">
+            <div class="big" id="resultBig"></div>
+            <p id="resultText"></p>
+            <a class="btn btn-wa" id="resultCta" href="https://wa.me/60123456789?text=Hi%2C%20I%20just%20did%20the%20HRDF%20claim%20check%20and%20want%20to%20learn%20more" target="_blank" rel="noopener" style="margin:0 auto;">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2z"/></svg>
+              Talk to us now
+            </a>
+            <div><button class="restart" id="restart">↺ Start over</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final">
+    <div class="glow"></div>
+    <h2 class="reveal">Don't let your <span>HRDF</span> go to waste.</h2>
+    <p class="reveal">We help you utilise your funds effectively — courses, team building & more.</p>
+    <div class="hero-cta reveal">
+      <a class="btn btn-wa" href="https://wa.me/60123456789?text=Hi%2C%20I%27d%20like%20to%20claim%20my%20HRDF" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2z"/></svg>
+        Connect with us
+      </a>
+      <a class="btn btn-ghost" href="tel:+60123456789">📞 +60 12-345 6789</a>
+    </div>
+    <div class="badge-row reveal">
+      <span class="tbadge">HRD Corp Registered Provider</span>
+      <span class="tbadge">100% Claimable Programmes</span>
+      <span class="tbadge">Free Consultation</span>
+    </div>
+  </section>
+
+  <!-- STICKY WHATSAPP -->
+  <a class="sticky-wa" href="https://wa.me/60123456789?text=Hi%2C%20I%27d%20like%20to%20know%20how%20to%20claim%20my%20HRDF" target="_blank" rel="noopener" aria-label="WhatsApp us">
+    <svg viewBox="0 0 24 24" fill="#063b1e"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.8.7.8-2.7-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5s-.5-1.3-.7-1.7-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3A3 3 0 0 0 6.5 10a5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.6 4c.6.3 1.1.4 1.5.6a3.5 3.5 0 0 0 1.6.1 2.7 2.7 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3z"/></svg>
+  </a>
+
+<script>
+  // ---------- FAQ DATA ----------
+  const faqs = [
+    {icon:'team', q:'Team building?', a:'Yes — many team-building and experiential programmes run by registered training providers are <strong>claimable</strong> under your levy. They build morale and develop real skills at the same time. Ask us which formats qualify.'},
+    {icon:'train', q:'Trainings?', a:'Technical, soft-skills, leadership, compliance, digital — a huge range of training is <strong>HRDF-claimable</strong>. If it develops your people, there is usually a way to fund it from your levy.'},
+    {icon:'clock', q:'No time to plan?', a:'That is exactly what we handle for you. We map your levy balance, recommend programmes, and manage the grant paperwork end-to-end so you <strong>spend minutes, not days.</strong>'},
+    {icon:'cap', q:'What courses can you claim?', a:'From short certified courses to full programmes across hundreds of categories. We match courses to your team\'s goals and confirm <strong>claimability before you commit.</strong>'},
+    {icon:'chart', q:'How can you maximise your funds?', a:'We review your remaining balance and build a plan that uses it fully before it expires — combining training, team building and other claimable activities for <strong>maximum value.</strong>'},
+    {icon:'check', q:'What else can be claimed?', a:'Beyond classroom training, things like certain conferences, e-learning, and development activities may qualify. Tell us your situation and we will show you <strong>everything you can claim.</strong>'},
+  ];
+  const icons = {
+    team:'<path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm-8 0a3 3 0 1 0-3-3 3 3 0 0 0 3 3zm0 2c-2.7 0-5 1.3-5 3v2h7v-2a4 4 0 0 1 1.5-3A8 8 0 0 0 8 13zm8 0a6 6 0 0 0-6 4v2h12v-2c0-2.7-3.3-4-6-4z" fill="currentColor"/>',
+    train:'<path d="M3 4h18v12H3zm0 14h18v2H3zm9-10-5 3 5 3 5-3z" fill="currentColor"/>',
+    clock:'<path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 11h-4v-2h2V7h2z" fill="currentColor"/>',
+    cap:'<path d="M12 3 1 9l11 6 9-4.9V17h2V9zm0 13-7-3.8V15l7 3.8 7-3.8v-2.8z" fill="currentColor"/>',
+    chart:'<path d="M3 3v18h18v-2H5V3zm5 12h2V9H8zm4 0h2V6h-2zm4 0h2v-4h-2z" fill="currentColor"/>',
+    check:'<path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm-1.2 14.2-3.5-3.5 1.4-1.4 2.1 2.1 4.9-4.9 1.4 1.4z" fill="currentColor"/>',
+  };
+  const faqEl = document.getElementById('faq');
+  faqs.forEach((f,i)=>{
+    const item = document.createElement('div');
+    item.className='faq-item';
+    item.innerHTML = `
+      <div class="faq-q">
+        <div class="faq-icon"><svg viewBox="0 0 24 24">${icons[f.icon]}</svg></div>
+        <div class="title">${f.q}</div>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-a"><div class="inner">${f.a}</div></div>`;
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click',()=>{
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(el=>{el.classList.remove('open');el.querySelector('.faq-a').style.maxHeight=null;});
+      if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
+    });
+    faqEl.appendChild(item);
+  });
+
+  // ---------- LEVELS / ROADMAP ----------
+  const levels = [
+    {
+      n:1, t:'Establishing Data Foundations',
+      s:'Module 1 · Clean, structure and prepare any spreadsheet fast.',
+      topics:['Basic Formula & Cell Operations','Transpose, Rank, Fill Series','Flash Fill (pattern recognition)','Text to Column (data parsing)','Remove Duplicates','Dynamic Tables'],
+      help:'You stop wrestling with messy, manual data. Raw exports become clean, structured tables in minutes — the groundwork for everything else.'
+    },
+    {
+      n:2, t:'Building the Lookup & Summary Engine',
+      s:'Modules 2 & 3 · Connect files and summarise instantly.',
+      topics:['VLOOKUP','HLOOKUP','XLOOKUP','Concatenate','Pivot Tables','Pivot Charts'],
+      help:'You pull the right figure from any file on demand and turn thousands of rows into a one-glance summary — no more copy-paste reconciliation.'
+    },
+    {
+      n:3, t:'Enforcing Accuracy & Automation',
+      s:'Modules 2 & 3 · Automate workflows and prevent errors.',
+      topics:['Mail Merge','Cell Reference','Sub Total','Consolidate','Data Validation','Approx Match','Conditional Formatting','Group & Ungroup'],
+      help:'Your reports validate themselves — inputs are forced to be correct and trends highlight automatically, so mistakes get caught before they spread.'
+    },
+    {
+      n:4, t:'Translating Data into Visual Narratives',
+      s:'Module 4 · Turn numbers into executive-ready stories.',
+      topics:['Understanding Charts','Selecting Charts','Creating Charts','Formatting Charts'],
+      help:'You present data that drives decisions — choosing the right chart, building it, and polishing it for executive presentations and action plans.'
+    },
+  ];
+  const levelsEl = document.getElementById('levels');
+  levels.forEach(l=>{
+    const d=document.createElement('div');
+    d.className='level';
+    d.innerHTML=`
+      <div class="level-head">
+        <div class="level-num">${l.n}</div>
+        <div class="lt"><h4>Level ${l.n}: ${l.t}</h4><p>${l.s}</p></div>
+        <div class="level-tog">+</div>
+      </div>
+      <div class="level-body"><div class="level-inner">
+        <div class="lbl">What you'll learn</div>
+        <div class="pills">${l.topics.map(t=>`<span class="pill">${t}</span>`).join('')}</div>
+        <div class="help"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2zM9 20a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1z"/></svg><p><b>How it helps your work:</b> ${l.help}</p></div>
+      </div></div>`;
+    const head=d.querySelector('.level-head');
+    const body=d.querySelector('.level-body');
+    head.addEventListener('click',()=>{
+      const open=d.classList.contains('open');
+      document.querySelectorAll('.level').forEach(el=>{el.classList.remove('open');el.querySelector('.level-body').style.maxHeight=null;});
+      if(!open){d.classList.add('open');body.style.maxHeight=body.scrollHeight+'px';}
+    });
+    levelsEl.appendChild(d);
+  });
+
+  // ---------- QUIZ ----------
+  const steps=[...document.querySelectorAll('.q-step')];
+  const dots=[...document.querySelectorAll('.pdot')];
+  const result=document.getElementById('result');
+  let cur=0;const ans=[];
+  function go(n){
+    steps.forEach(s=>s.classList.remove('active'));
+    if(n<steps.length){steps[n].classList.add('active');}
+    dots.forEach((d,i)=>d.classList.toggle('on',i<=n));
+    cur=n;
+  }
+  document.querySelectorAll('.opt').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      ans[cur]=btn.dataset.v;
+      if(cur<steps.length-1){go(cur+1);}
+      else{showResult();}
+    });
+  });
+  function showResult(){
+    steps.forEach(s=>s.classList.remove('active'));
+    dots.forEach(d=>d.classList.add('on'));
+    const big=document.getElementById('resultBig');
+    const txt=document.getElementById('resultText');
+    // likely has claimable funds if registered-ish and not fully used
+    const noEmp = ans[0]==='no';
+    const fullyUsed = ans[2]==='yes';
+    if(noEmp){
+      big.textContent='Let\u2019s double-check 🤝';
+      txt.textContent='Eligibility depends on your setup. A quick chat is the fastest way to know exactly where you stand — it\u2019s free.';
+    } else if(fullyUsed){
+      big.textContent='Great work! 🎉';
+      txt.textContent='Sounds like you\u2019re using your levy well. We can still help you plan next year and find programmes you may have missed.';
+    } else {
+      big.textContent='You likely have unclaimed funds! 💰';
+      txt.textContent='Unused levy gets forfeited. Let\u2019s map your balance and turn it into training & team building before the window closes.';
+    }
+    result.classList.add('show');
+  }
+  document.getElementById('restart').addEventListener('click',()=>{
+    result.classList.remove('show');ans.length=0;go(0);
+  });
+
+  // ---------- SCROLL REVEAL ----------
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
