@@ -39,4 +39,4 @@ def load_page() -> str:
 
 
 # ---- Render the landing page inside a full-height component ----
-components.html(load_page(), height=5400, scrolling=True)
+components.html(load_page(), height=6600, scrolling=True)

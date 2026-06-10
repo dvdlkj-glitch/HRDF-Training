@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claim Your HRDF — Don't Let It Go to Waste</title>
+<title>Claim Your HRDF — Excel × AI Automation Training</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -246,6 +246,62 @@
   .ucard .ulink{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-weight:800;font-size:14px;text-decoration:none;}
   .ucard.feat .ulink{color:var(--lime-bright);}
   .ucard:not(.feat) .ulink{color:var(--emerald);}
+  /* ===== AI AUTOMATION LAB ===== */
+  .zh{font-weight:700;}
+  .ailab{position:relative;overflow:hidden;border-radius:30px;background:linear-gradient(150deg,#0c382f,#071f1a);color:var(--cream);padding:clamp(28px,5vw,52px);box-shadow:0 30px 80px rgba(7,40,28,.3);margin-top:8px;}
+  .ailab .glow{position:absolute;width:420px;height:420px;border-radius:50%;background:var(--lime);filter:blur(100px);opacity:.18;top:-160px;left:-120px;pointer-events:none;}
+  .ailab h3{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(23px,3.4vw,34px);margin:18px 0 8px;line-height:1.1;}
+  .ailab h3 span{color:var(--lime-bright);}
+  .ailab .lead{color:rgba(244,247,240,.82);font-size:clamp(15px,2.2vw,18px);max-width:740px;line-height:1.55;}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:30px 0 8px;}
+  .step{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:22px 20px;position:relative;}
+  .step-num{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-family:"Bricolage Grotesque";font-weight:800;font-size:18px;color:#0a2f2a;background:var(--lime-bright);margin-bottom:14px;}
+  .step h5{font-size:16px;font-weight:800;margin-bottom:6px;}
+  .step p{font-size:13.5px;color:rgba(244,247,240,.74);line-height:1.5;}
+  .step .arrow{position:absolute;right:-13px;top:50%;transform:translateY(-50%);color:var(--lime-bright);font-size:24px;font-weight:800;z-index:2;}
+  .ai-stats{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px;}
+  .ai-stat{flex:1 1 200px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:18px 20px;}
+  .ai-stat .big{font-family:"Bricolage Grotesque";font-weight:800;font-size:24px;color:var(--lime-bright);}
+  .ai-stat .lbl2{font-size:12.5px;color:rgba(244,247,240,.72);margin-top:4px;line-height:1.4;}
+  .ai-note{margin-top:22px;font-size:13.5px;color:rgba(244,247,240,.72);line-height:1.55;}
+  .ai-note code{background:rgba(255,255,255,.1);padding:2px 7px;border-radius:6px;color:var(--lime-bright);font-size:12.5px;}
+  .ailab .hero-cta{margin-top:26px;justify-content:flex-start;}
+  /* one-click report demo */
+  .demo{margin-top:26px;}
+  .demo-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch;}
+  .demo-panel{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;}
+  .dp-head{background:rgba(255,255,255,.07);padding:11px 14px;font-size:12.5px;font-weight:700;color:rgba(244,247,240,.85);border-bottom:1px solid rgba(255,255,255,.1);}
+  .dp-body{padding:14px;flex:1;}
+  .rawrow{display:grid;grid-template-columns:.8fr 1.1fr .8fr 1fr;gap:6px;font-size:11.5px;color:rgba(244,247,240,.7);padding:5px 0;border-bottom:1px dashed rgba(255,255,255,.08);}
+  .rawrow.rh{font-weight:800;color:var(--lime-bright);border-bottom:1px solid rgba(255,255,255,.18);}
+  .rawrow span:last-child{text-align:right;}
+  .rawmore{font-size:11px;color:rgba(244,247,240,.45);margin-top:8px;font-style:italic;}
+  .demo-mid{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-width:160px;}
+  .gen-btn{background:var(--lime-bright);color:#0a2f2a;border:none;border-radius:14px;padding:16px 22px;font-family:"Manrope";font-weight:800;font-size:15px;cursor:pointer;text-align:center;line-height:1.35;box-shadow:0 10px 26px rgba(182,232,74,.3);transition:transform .15s ease,box-shadow .15s ease;}
+  .gen-btn small{display:block;font-weight:700;font-size:11px;opacity:.75;margin-top:2px;}
+  .gen-btn:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(182,232,74,.45);}
+  .gen-btn:disabled{opacity:.6;cursor:default;transform:none;box-shadow:none;}
+  .gen-prog{width:100%;height:6px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden;opacity:0;transition:opacity .2s;}
+  .gen-prog.on{opacity:1;}
+  .gen-prog span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--emerald),var(--lime-bright));border-radius:3px;}
+  .gen-prog.run span{width:100%;transition:width 1.1s ease;}
+  .out-placeholder{display:flex;height:100%;min-height:160px;align-items:center;justify-content:center;text-align:center;font-size:12.5px;color:rgba(244,247,240,.45);line-height:1.7;padding:10px;}
+  .out-content{display:none;}
+  .demo.done .out-content{display:block;}
+  .demo.done .out-placeholder{display:none;}
+  .kpi-row{display:flex;gap:10px;margin-bottom:14px;}
+  .kpi{flex:1;background:rgba(255,255,255,.06);border-radius:12px;padding:12px 8px;text-align:center;}
+  .kpi .kv{font-family:"Bricolage Grotesque";font-weight:800;font-size:18px;color:var(--lime-bright);}
+  .kpi .kl{font-size:10.5px;color:rgba(244,247,240,.65);margin-top:3px;}
+  .bars{display:flex;align-items:flex-end;gap:12px;height:120px;padding:0 4px;}
+  .bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;}
+  .bar span{width:100%;height:0;background:linear-gradient(180deg,var(--lime-bright),var(--emerald));border-radius:6px 6px 0 0;transition:height 1s cubic-bezier(.2,.8,.2,1) .15s;}
+  .demo.done .bar span{height:var(--h);}
+  .bar label{font-size:10px;color:rgba(244,247,240,.6);margin-top:6px;text-align:center;}
+  .replay{margin-top:14px;background:none;border:1px solid rgba(255,255,255,.25);color:rgba(244,247,240,.8);border-radius:10px;padding:8px 16px;font-family:"Manrope";font-weight:700;font-size:13px;cursor:pointer;opacity:0;transition:opacity .3s,background .2s;}
+  .replay:hover{background:rgba(255,255,255,.1);}
+  .demo.done .replay{opacity:1;}
+  @media(max-width:760px){.demo-grid{grid-template-columns:1fr;}.demo-mid{flex-direction:row;min-width:0;}.gen-btn{flex:1;}.bars{height:104px;}}
 
   @media(max-width:880px){
     .outcome-grid{grid-template-columns:repeat(2,1fr);}
@@ -257,6 +313,10 @@
   }
   @media(max-width:560px){
     section{padding:44px 16px;}
+    .steps{grid-template-columns:1fr;}
+    .step .arrow{display:none;}
+    .ailab{border-radius:22px;}
+    .ailab .hero-cta .btn{flex:1 1 100%;justify-content:center;}
     .hero{padding:34px 16px 52px;}
     .hero-eyebrow{font-size:11px;letter-spacing:.12em;padding:7px 13px;margin-bottom:18px;}
     /* full-width, easy-to-tap buttons */
@@ -330,7 +390,7 @@
   <!-- HERO -->
   <header class="hero">
     <div class="glow a"></div><div class="glow b"></div>
-    <div class="hero-eyebrow"><span class="pulse"></span>HRD Corp Registered Provider · 100% Claimable</div>
+    <div class="hero-eyebrow"><span class="pulse"></span>HRD Corp Registered · AI-Powered Training · 100% Claimable</div>
     <div class="poster-wrap">
       <img src="poster.png" alt="It's time to claim your HRDF — don't let your funds go to waste">
     </div>
@@ -349,22 +409,23 @@
     <div class="wrap">
       <div class="spotlight reveal">
         <div class="glow"></div>
-        <span class="spot-flag"><span class="dot"></span>What's New · Featured Programme</span>
-        <h2>Excel Operational Excellence<br><span>Transform daily work through Excel mastery.</span></h2>
-        <p class="spot-sub">A 2-day intermediate, hands-on programme that re-engineers how your team handles data — turning manual, error-prone routines into fast, automated, decision-ready workflows. <strong>100% HRDF-claimable.</strong></p>
+        <span class="spot-flag"><span class="dot"></span>What's New · AI-Powered Programme · 全新 AI 課程</span>
+        <h2>Excel <span>×</span> AI Operational Excellence<br><span>Excel × AI 智能自動化 — 用 AI 加速每日工作</span></h2>
+        <p class="spot-sub">A 2-day intermediate, hands-on programme that pairs core Excel mastery with AI-assisted automation — describe a task in plain language and let AI build small Python tools that finish your monthly routines in one click. 結合 Excel 實戰與 AI 自動化,把每月例行工作變成一鍵完成。 <strong>100% HRDF-claimable.</strong></p>
         <div class="spot-chips">
           <span class="chip"><b>2</b> intensive days</span>
+          <span class="chip"><b>AI</b> + Python automation</span>
           <span class="chip">9:00 AM – 5:00 PM</span>
           <span class="chip">In-house training</span>
           <span class="chip">Admin · HR · Finance · Operations</span>
           <span class="chip"><b>100%</b> claimable</span>
         </div>
         <div class="hero-cta">
-          <a class="btn btn-wa" href="https://wa.me/60123456789?text=Hi%2C%20I%27d%20like%20to%20book%20the%202-day%20Excel%20Operational%20Excellence%20programme%20using%20our%20HRDF%20levy" target="_blank" rel="noopener">
+          <a class="btn btn-wa" href="https://wa.me/60123456789?text=Hi%2C%20we%27d%20like%20to%20arrange%20the%20Excel%20x%20AI%20programme%20in-house%20for%20our%20team%20using%20our%20HRDF%20levy" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2z"/></svg>
-            Book this programme
+            Arrange for your team · 為團隊安排
           </a>
-          <a class="btn btn-ghost" href="#curriculum">Explore what you'll learn ↓</a>
+          <a class="btn btn-ghost" href="#ai-lab">See the AI Automation Lab ↓</a>
         </div>
       </div>
     </div>
@@ -374,9 +435,9 @@
   <section style="padding-top:0;">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="tag">The big picture</div>
+        <div class="tag">The big picture · 重點總覽</div>
         <h2>What your team will walk away able to do</h2>
-        <p>Four core capabilities that put hours back into every week.</p>
+        <p>Four core capabilities that put hours back into every week. 四大核心能力,每週省下大量時間。</p>
       </div>
       <div class="outcome-grid reveal">
         <div class="ocard">
@@ -407,9 +468,9 @@
   <section style="padding-top:0;">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="tag">The transformation</div>
+        <div class="tag">The transformation · 前後對比</div>
         <h2>From operational drag to strategic speed</h2>
-        <p>The same four tasks — before and after the programme.</p>
+        <p>The same four tasks — before and after the programme. 同樣四項任務,訓練前後的差別。</p>
       </div>
       <div class="ba-grid reveal">
         <div class="ba-col before">
@@ -434,11 +495,89 @@
   <section style="padding-top:0;" id="curriculum">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="tag">Deep dive · The capability roadmap</div>
+        <div class="tag">Deep dive · 能力路徑圖</div>
         <h2>What you'll learn, level by level</h2>
-        <p>Each level builds on the last — raw data-entry skills grow into a full analytical workflow. Tap a level to see the detail.</p>
+        <p>Each level builds on the last — raw data-entry skills grow into a full analytical workflow. Tap a level to see the detail. 每一級都建立在前一級之上,點開查看細節。</p>
       </div>
       <div class="levels reveal" id="levels"></div>
+    </div>
+  </section>
+
+  <!-- AI AUTOMATION LAB -->
+  <section class="prog" id="ai-lab">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="tag">🤖 New · AI Automation Lab · AI 自動化實驗室</div>
+        <h2>Let AI build your Excel automations</h2>
+        <p>No coding background needed — describe the task in plain language, AI writes the Python, you press Run. 不需程式基礎:用自然語言描述,AI 幫你產生 Python,一鍵執行。</p>
+      </div>
+      <div class="ailab reveal">
+        <div class="glow"></div>
+        <span class="spot-flag"><span class="dot"></span>Featured automation · 主打自動化</span>
+        <h3>One-Click Monthly Report Generator <span>一鍵月報產生器</span></h3>
+        <p class="lead">Point it at your raw sales / transactions file and it instantly builds a polished monthly report — KPI summary, pivot tables by category and region, top products and a chart — formatted identically every month. 原始資料丟進去,立刻產生格式精美、每月一致的月報。</p>
+
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><h5>Describe it · 描述需求</h5><p>Tell Claude in plain words: "summarise this sales file into a monthly report with charts." 用白話告訴 AI 你要什麼。</p><span class="arrow">→</span></div>
+          <div class="step"><div class="step-num">2</div><h5>AI writes Python · AI 產生程式</h5><p>Claude generates a ready-to-run script using pandas &amp; openpyxl. AI 產生可直接執行的 Python。</p><span class="arrow">→</span></div>
+          <div class="step"><div class="step-num">3</div><h5>One-click run · 一鍵執行</h5><p>Run it any month — the report rebuilds in seconds, error-free. 每月一鍵重跑,幾秒完成、零錯誤。</p></div>
+        </div>
+
+        <div class="demo" id="demo">
+          <div class="demo-grid">
+            <div class="demo-panel raw">
+              <div class="dp-head">📄 Raw data 原始資料 · sample_sales_data.xlsx</div>
+              <div class="dp-body">
+                <div class="rawrow rh"><span>Date</span><span>Category</span><span>Region</span><span>Revenue</span></div>
+                <div class="rawrow"><span>05-02</span><span>Hardware</span><span>East</span><span>18,240</span></div>
+                <div class="rawrow"><span>05-02</span><span>Services</span><span>North</span><span>6,400</span></div>
+                <div class="rawrow"><span>05-03</span><span>Software</span><span>Central</span><span>3,950</span></div>
+                <div class="rawrow"><span>05-03</span><span>Accessories</span><span>South</span><span>720</span></div>
+                <div class="rawrow"><span>05-04</span><span>Hardware</span><span>North</span><span>21,100</span></div>
+                <div class="rawmore">+ 226 more rows… 還有 226 筆</div>
+              </div>
+            </div>
+            <div class="demo-mid">
+              <button class="gen-btn" id="genBtn">▶ Generate Report<small>一鍵產生報表</small></button>
+              <div class="gen-prog" id="genProg"><span></span></div>
+            </div>
+            <div class="demo-panel out">
+              <div class="dp-head">📊 Monthly_Report.xlsx · May 2026</div>
+              <div class="dp-body">
+                <div class="out-placeholder">Press “Generate” and watch the report build itself →<br>按下「產生報表」,看報表自動生成</div>
+                <div class="out-content">
+                  <div class="kpi-row">
+                    <div class="kpi"><div class="kv" data-target="1917098" data-prefix="RM ">RM 0</div><div class="kl">Revenue 總營收</div></div>
+                    <div class="kpi"><div class="kv" data-target="231">0</div><div class="kl">Orders 訂單</div></div>
+                  </div>
+                  <div class="bars">
+                    <div class="bar" style="--h:100%"><span></span><label>Hardware</label></div>
+                    <div class="bar" style="--h:49%"><span></span><label>Services</label></div>
+                    <div class="bar" style="--h:27%"><span></span><label>Software</label></div>
+                    <div class="bar" style="--h:4%"><span></span><label>Access.</label></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:center;"><button class="replay" id="replayBtn">↺ Replay 重播</button></div>
+        </div>
+
+        <div class="ai-stats">
+          <div class="ai-stat"><div class="big">Hours → seconds</div><div class="lbl2">Monthly report time · 月報時間 數小時 → 數秒</div></div>
+          <div class="ai-stat"><div class="big">0 manual errors</div><div class="lbl2">Same format every run · 每次格式一致、零手誤</div></div>
+          <div class="ai-stat"><div class="big">No coding</div><div class="lbl2">Plain language to AI · 用自然語言,無需寫程式</div></div>
+        </div>
+
+        <p class="ai-note">Hands-on in the course: you'll run the included demo — <code>report_generator.py</code> + <code>sample_sales_data.xlsx</code> → <code>Monthly_Report.xlsx</code> — then adapt it to your own files. 課堂實作:直接執行隨附範例,再套用到你自己的檔案。</p>
+
+        <div class="hero-cta">
+          <a class="btn btn-wa" href="https://wa.me/60123456789?text=Hi%2C%20I%27d%20like%20to%20book%20the%20Excel%20x%20AI%20Automation%20programme%20using%20our%20HRDF%20levy" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2z"/></svg>
+            Enquire for your team · 洽詢內訓安排
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -475,28 +614,28 @@
   <section style="padding-top:0;">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div class="tag">What's coming up</div>
-        <h2>Plan your levy across the year</h2>
-        <p>Start with Excel mastery, then keep developing your team with more claimable programmes.</p>
+        <div class="tag">In-house programmes · 內訓課程</div>
+        <h2>More you can run in-house for your team</h2>
+        <p>Built for your own employees, not open classes — fully claimable in-house programmes you can schedule around your team. 專為貴公司員工設計的內訓,非公開班,可申領、可依團隊時間安排。</p>
       </div>
       <div class="up-grid reveal">
         <div class="ucard feat">
-          <span class="utag live">Now enrolling</span>
-          <h4>Excel Operational Excellence</h4>
-          <p class="umeta">2-day intermediate · Admin, HR, Finance &amp; Operations · the flagship programme above.</p>
+          <span class="utag live">Featured · 主打課程</span>
+          <h4>Excel × AI Operational Excellence</h4>
+          <p class="umeta">2-day intermediate · pairs Excel mastery with AI-assisted Python automation. 結合 Excel 實戰與 AI 自動化。</p>
           <a class="ulink" href="#program">View programme →</a>
         </div>
         <div class="ucard">
-          <span class="utag soon">Coming soon</span>
+          <span class="utag soon">On request · 可安排</span>
           <h4>Advanced Excel &amp; Dashboards</h4>
-          <p class="umeta">Power Query, advanced functions and interactive dashboards for power users ready to go further.</p>
-          <a class="ulink" href="https://wa.me/60123456789?text=Hi%2C%20please%20tell%20me%20when%20the%20Advanced%20Excel%20%26%20Dashboards%20programme%20is%20scheduled" target="_blank" rel="noopener">Register interest →</a>
+          <p class="umeta">Power Query, advanced functions and interactive dashboards for power users ready to go further. 進階函數與互動式儀表板。</p>
+          <a class="ulink" href="https://wa.me/60123456789?text=Hi%2C%20we%27d%20like%20to%20enquire%20about%20running%20Advanced%20Excel%20%26%20Dashboards%20in-house%20for%20our%20team" target="_blank" rel="noopener">Enquire 洽詢 →</a>
         </div>
         <div class="ucard">
-          <span class="utag soon">Coming soon</span>
+          <span class="utag soon">On request · 可安排</span>
           <h4>Team Building &amp; Soft Skills</h4>
-          <p class="umeta">Experiential, claimable programmes that lift morale while developing real workplace skills.</p>
-          <a class="ulink" href="https://wa.me/60123456789?text=Hi%2C%20I%27d%20like%20to%20hear%20about%20upcoming%20team%20building%20%26%20soft%20skills%20programmes" target="_blank" rel="noopener">Register interest →</a>
+          <p class="umeta">Experiential, claimable programmes that lift morale while developing real workplace skills. 體驗式團建,可申領。</p>
+          <a class="ulink" href="https://wa.me/60123456789?text=Hi%2C%20we%27d%20like%20to%20enquire%20about%20running%20a%20team%20building%20%26%20soft%20skills%20programme%20in-house" target="_blank" rel="noopener">Enquire 洽詢 →</a>
         </div>
       </div>
     </div>
@@ -616,6 +755,44 @@
     faqEl.appendChild(item);
   });
 
+  // ---------- ONE-CLICK REPORT DEMO ----------
+  (function(){
+    const demo=document.getElementById('demo');
+    if(!demo) return;
+    const btn=document.getElementById('genBtn');
+    const prog=document.getElementById('genProg');
+    const replay=document.getElementById('replayBtn');
+    let running=false;
+    function countUp(el){
+      const target=+el.dataset.target, prefix=el.dataset.prefix||'', dur=900, t0=performance.now();
+      function step(t){
+        const p=Math.min((t-t0)/dur,1);
+        const val=Math.floor(target*(1-Math.pow(1-p,3)));
+        el.textContent=prefix+val.toLocaleString();
+        if(p<1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    function run(){
+      if(running) return; running=true;
+      demo.classList.remove('done');
+      demo.querySelectorAll('.kv').forEach(el=>{el.textContent=(el.dataset.prefix||'')+'0';});
+      btn.disabled=true;
+      prog.classList.add('on');
+      requestAnimationFrame(()=>prog.classList.add('run'));
+      setTimeout(()=>{
+        demo.classList.add('done');
+        prog.classList.remove('on','run');
+        demo.querySelectorAll('.kv').forEach(countUp);
+        btn.disabled=false; running=false;
+      },1200);
+    }
+    btn.addEventListener('click',run);
+    replay.addEventListener('click',run);
+    const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){run();io.disconnect();}});},{threshold:.4});
+    io.observe(demo);
+  })();
+
   // ---------- LEVELS / ROADMAP ----------
   const levels = [
     {
@@ -642,6 +819,12 @@
       topics:['Understanding Charts','Selecting Charts','Creating Charts','Formatting Charts'],
       help:'You present data that drives decisions — choosing the right chart, building it, and polishing it for executive presentations and action plans.'
     },
+    {
+      n:5, t:'AI-Assisted Automation (Python) · AI 自動化',
+      s:'New · Use AI to build small Python tools for your Excel routines. 用 AI 產生 Python 小工具。',
+      topics:['Describe task to AI 自然語言描述','AI generates Python AI 產生程式','One-Click Monthly Report 一鍵月報','Auto pivots & charts 自動樞紐圖表','Repeatable every month 每月可重跑','No coding background 無需程式基礎'],
+      help:'You turn a multi-hour monthly report into a single click — AI writes the Python, you just run it, and the same workflow automates any repetitive Excel task. 把數小時的月報變成一鍵完成,同樣方法可自動化任何重複性工作。'
+    }
   ];
   const levelsEl = document.getElementById('levels');
   levels.forEach(l=>{
