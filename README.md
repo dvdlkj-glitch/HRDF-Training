@@ -52,8 +52,10 @@ Then open http://localhost:8501 — check the hero video and the sliding photo m
 
 - **Embed height:** change `height=900` in `streamlit_app.py`.
 - **Marquee speed:** in `static/index.html`, edit `slideX 42s` (smaller = faster).
-- **Contact details:** replace the `[your-email]` and `[your-number]` placeholders, plus
-  the testimonial `[ Client name ]` / `[ Title, Company ]`, in `static/index.html`.
+- **Contact details:** the proposal email is set to `dvdlkj@gmail.com`. To add a WhatsApp
+  CTA, drop a `Chat on WhatsApp` ghost button back into `#enquire` and the footer pointing at
+  `https://wa.me/<international-number>`. The testimonial section was removed pending a real,
+  approved quote — re-add a `section.block.testi` block when you have one.
 
 ## Design
 
