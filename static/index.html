@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b0d10">
+<title>SLT Academy, Destress Team Building in Malaysia</title>
+<meta name="description" content="Curated, HRD Corp claimable team-building experiences in Malaysia. Designed around your goals and run end to end by SLT Academy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Display: Bricolage Grotesque (grotesk, not a serif tell). Body: Manrope. Labels: JetBrains Mono. -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* One locked theme: warm off-black. One accent: amber. */
+    --bg:#0b0d10; --bg2:#0e1216; --panel:#141a20; --panel2:#171e26;
+    --ink:#f3eee4; --muted:#9aa7b2; --faint:#6f7d88;
+    --amber:#f0a83e; --amber-bright:#ffc173; --amber-deep:#c97e1f;
+    --line:rgba(243,238,228,.12); --line-soft:rgba(243,238,228,.07);
+    --maxw:1200px;
+    /* Documented radius scale: small (controls) + large (surfaces). */
+    --r-sm:8px; --r:14px;
+    --shadow:0 24px 60px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 30px}
+  .disp{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.02}
+  .mono{font-family:'JetBrains Mono',monospace;letter-spacing:.2em;text-transform:uppercase;font-size:.7rem;color:var(--faint)}
+  a{color:inherit;text-decoration:none}
+  img,video{display:block;max-width:100%}
+  ::selection{background:var(--amber);color:#1a1206}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:2px}
+
+  /* Subtle grain to break digital flatness (fixed, never on a scroll container). */
+  .grain{position:fixed;inset:0;z-index:70;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  /* ---------- NAV (one line, <= 72px) ---------- */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+    height:68px;padding:0 30px;transition:background .35s,border-color .35s;border-bottom:1px solid transparent;
+    padding-top:env(safe-area-inset-top)}
+  .nav.scrolled{background:rgba(11,13,16,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:700;font-size:1.02rem}
+  .brand .mark{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.02rem;
+    width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:var(--r-sm);
+    color:var(--amber);background:linear-gradient(160deg,rgba(240,168,62,.16),transparent)}
+  .brand b{font-weight:700;letter-spacing:-.01em}
+  .brand span small{display:block;font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.22em;color:var(--faint);text-transform:uppercase;margin-top:1px;font-weight:400}
+  .nav-links{display:flex;align-items:center;gap:32px}
+  .nav-links a:not(.btn){font-size:.92rem;color:var(--muted);transition:color .2s}
+  .nav-links a:not(.btn):hover{color:var(--ink)}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:600;font-size:.92rem;padding:13px 22px;min-height:44px;border-radius:var(--r-sm);cursor:pointer;border:none;transition:transform .18s ease,box-shadow .25s,background .25s,border-color .25s;white-space:nowrap}
+  .btn:active{transform:translateY(1px) scale(.99)}
+  .btn-amber{background:var(--amber);color:#1a1206;box-shadow:0 8px 26px rgba(240,168,62,.3)}
+  .btn-amber:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(240,168,62,.42);background:var(--amber-bright)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--ink);background:rgba(243,238,228,.05)}
+
+  /* ---------- HERO (asymmetric, left-aligned, fits viewport) ---------- */
+  /* vh fallback for older mobile browsers, svh for modern (stable, no address-bar jump) */
+  .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
+  .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
+  .hero-grade{position:absolute;inset:0;z-index:1;background:
+    linear-gradient(180deg,rgba(11,13,16,.55) 0%,rgba(11,13,16,.25) 40%,rgba(11,13,16,.96) 100%),
+    radial-gradient(120% 80% at 15% 90%, rgba(240,168,62,.18), transparent 55%)}
+  .hero-vignette{position:absolute;inset:0;z-index:1;pointer-events:none;box-shadow:inset 0 0 240px 70px rgba(0,0,0,.6)}
+  .hero-content{position:relative;z-index:5;width:100%;padding-bottom:10vh;max-width:var(--maxw);margin:0 auto;padding-left:30px;padding-right:30px}
+  .hero .eyebrow{color:var(--amber);margin-bottom:22px;opacity:0}
+  .hero h1{font-size:clamp(2.5rem,7.4vw,5.6rem);max-width:16ch;margin-bottom:22px;opacity:0}
+  .hero h1 .accent{color:var(--amber);font-weight:800}
+  .hero p.lede{font-size:clamp(1.02rem,1.5vw,1.2rem);color:#e7e0d3;max-width:50ch;margin-bottom:32px;opacity:0;font-weight:500}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;opacity:0}
+
+  /* entry reveal (MOTION_INTENSITY 6, honored by reduced-motion block below) */
+  .reveal{animation:up .85s cubic-bezier(.2,.7,.2,1) forwards}
+  .d1{animation-delay:.1s}.d2{animation-delay:.26s}.d3{animation-delay:.42s}.d4{animation-delay:.58s}
+  @keyframes up{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ---------- TRUST BAND (moved out of hero) ---------- */
+  .trust-band{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .trust-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+  .trust-grid .t{padding:30px 30px;border-left:1px solid var(--line-soft)}
+  .trust-grid .t:first-child{border-left:none}
+  .trust-grid b{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1.45rem;display:block;letter-spacing:-.01em}
+  .trust-grid span{color:var(--muted);font-size:.88rem}
+
+  /* ---------- SECTIONS ---------- */
+  section.block{padding:108px 0;position:relative}
+  .eyebrow{color:var(--amber);margin-bottom:16px;display:inline-block}
+  .h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(2rem,4.2vw,3.2rem);line-height:1.04;letter-spacing:-.02em;max-width:20ch}
+  .sub{color:var(--muted);max-width:60ch;margin-top:18px;font-size:1.06rem}
+
+  /* SHOWREEL: asymmetric video grid, no overlay captions */
+  .showreel{background:var(--bg2)}
+  .reel-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:16px;margin-top:50px}
+  .reel-item{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:#000}
+  .reel-item video{width:100%;height:100%;object-fit:cover}
+  .reel-big{grid-row:span 2;aspect-ratio:16/10}
+  .reel-tall{aspect-ratio:9/16}
+  .reel-wide{aspect-ratio:16/9}
+
+  /* EXPERIENCES: bento, exact 4 cells, varied sizes + real visual cells */
+  .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:50px}
+  .bcell{position:relative;border:1px solid var(--line);border-radius:var(--r);padding:28px;overflow:hidden;min-height:200px;
+    display:flex;flex-direction:column;justify-content:flex-end;transition:transform .3s,border-color .3s}
+  .bcell:hover{transform:translateY(-4px);border-color:rgba(240,168,62,.45)}
+  .bcell h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1.32rem;letter-spacing:-.01em;margin-bottom:8px}
+  .bcell p{color:var(--muted);font-size:.94rem;max-width:42ch}
+  .bcell.span4{grid-column:span 4}
+  .bcell.span3{grid-column:span 3}
+  .bcell.span2{grid-column:span 2}
+  /* photo-backed cell */
+  .bcell.photo{justify-content:flex-end;min-height:340px;color:#fff}
+  .bcell.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform 1.1s ease}
+  .bcell.photo:hover img{transform:scale(1.06)}
+  .bcell.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,13,16,.1) 30%,rgba(11,13,16,.88));z-index:1}
+  .bcell.photo > *{position:relative;z-index:2}
+  .bcell.photo p{color:#e7e0d3}
+  /* amber-tinted cell */
+  .bcell.tint{background:linear-gradient(155deg,rgba(240,168,62,.16),rgba(240,168,62,.03)),var(--panel)}
+  .bcell.solid{background:var(--panel)}
+
+  /* WHY: split (used once) */
+  .why{background:var(--bg2)}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .split .media{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3}
+  .split .media img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease}
+  .split .media:hover img{transform:scale(1.06)}
+  .why-list{margin-top:26px;border-top:1px solid var(--line)}
+  .why-list .row{display:flex;gap:18px;padding:22px 0;border-bottom:1px solid var(--line-soft)}
+  .why-list .key{width:30px;height:30px;flex:none;border-radius:var(--r-sm);background:rgba(240,168,62,.12);color:var(--amber);display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:.8rem}
+  .why-list h4{font-size:1.06rem;font-weight:700;margin-bottom:3px}
+  .why-list p{color:var(--muted);font-size:.94rem}
+
+  /* GALLERY: single marquee on the page */
+  .marquee{position:relative;margin-top:46px;overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+            mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+  .mtrack{display:flex;width:max-content;animation:slideX 42s linear infinite}
+  .marquee:hover .mtrack{animation-play-state:paused}
+  .mcard{position:relative;flex:0 0 auto;margin-right:20px;width:min(80vw,520px);aspect-ratio:16/10;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+  .mcard img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+  .mcard:hover img{transform:scale(1.07)}
+  @keyframes slideX{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* PROCESS: ordered rows */
+  .process{background:var(--bg2)}
+  .steps{margin-top:50px;border-top:1px solid var(--line)}
+  .step{display:grid;grid-template-columns:64px 1fr;gap:24px;padding:28px 0;border-bottom:1px solid var(--line-soft);transition:padding-left .3s}
+  .step:hover{padding-left:8px}
+  .step .num{font-family:'JetBrains Mono',monospace;color:var(--amber);font-size:.95rem;padding-top:5px}
+  .step h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:1.4rem;letter-spacing:-.01em}
+  .step p{color:var(--muted);font-size:.95rem;margin-top:5px;max-width:62ch}
+
+  /* TESTIMONIAL: centered statement (distinct from CTA) */
+  .testi{text-align:center}
+  .stars{color:var(--amber);letter-spacing:.32em;font-size:1.05rem}
+  .testi .q{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(1.5rem,3.4vw,2.5rem);line-height:1.22;letter-spacing:-.015em;max-width:24ch;margin:24px auto 0;text-wrap:balance}
+  .testi cite{display:block;margin-top:26px;color:var(--muted);font-style:normal;font-size:.95rem}
+
+  /* CTA: full-width banner, left text + right actions (distinct from testimonial) */
+  .cta-final{background:radial-gradient(90% 130% at 18% 0%, rgba(240,168,62,.16), transparent 58%),var(--bg2);border-top:1px solid var(--line)}
+  .cta-row{display:grid;grid-template-columns:1.3fr .7fr;gap:48px;align-items:center}
+  .cta-final h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.04;letter-spacing:-.02em;max-width:18ch}
+  .cta-final p{color:var(--muted);margin-top:16px;max-width:46ch}
+  .cta-actions{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+  .cta-actions .btn{width:100%;justify-content:center}
+
+  footer{border-top:1px solid var(--line);padding:46px 0;color:var(--muted);font-size:.86rem}
+  .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;align-items:center}
+  .foot a:hover{color:var(--ink)}
+
+  /* scroll reveal */
+  .obs{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .obs.in{opacity:1;transform:none}
+
+  /* ---------- TABLET ---------- */
+  @media(max-width:920px){
+    .reel-grid{grid-template-columns:1fr 1fr}
+    .bento{grid-template-columns:repeat(2,1fr)}
+    .bcell.span4,.bcell.span3,.bcell.span2{grid-column:span 1}
+    .bcell.photo{grid-column:span 2}
+    .split{grid-template-columns:1fr;gap:32px}
+    .split .media{aspect-ratio:16/10}
+    .cta-row{grid-template-columns:1fr;gap:28px}
+    .cta-actions{flex-direction:row;flex-wrap:wrap}
+    .cta-actions .btn{width:auto}
+  }
+  /* ---------- PHONE ---------- */
+  @media(max-width:640px){
+    .wrap,.hero-content{padding-left:20px;padding-right:20px}
+    .nav{padding:0 20px;height:60px}
+    .nav-links{gap:0}
+    .nav-links a:not(.btn){display:none}
+    .btn{padding:12px 18px;font-size:.88rem}
+    section.block{padding:68px 0}
+    .hero-content{padding-bottom:8vh}
+    .hero-cta .btn{flex:1 1 auto;justify-content:center}
+    .trust-grid{grid-template-columns:1fr}
+    .trust-grid .t{border-left:none;border-top:1px solid var(--line-soft);padding:22px 20px}
+    .trust-grid .t:first-child{border-top:none}
+    .reel-grid{grid-template-columns:1fr;gap:14px}
+    .reel-big{grid-row:auto;aspect-ratio:16/10}
+    .reel-tall{aspect-ratio:9/16;max-width:300px;margin-inline:auto}
+    .bento{grid-template-columns:1fr}
+    .bcell.photo{grid-column:span 1}
+    .step{grid-template-columns:46px 1fr;gap:14px}
+    .mcard{width:82vw;margin-right:14px}
+    .mtrack{animation-duration:28s}
+  }
+  @media(max-width:380px){
+    .hero h1{font-size:2.3rem}
+    .h2{font-size:1.8rem}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal,.hero .eyebrow,.hero h1,.hero p.lede,.hero-cta{opacity:1!important}
+    .obs{opacity:1;transform:none}
+    .mtrack{transform:none!important}
+    .marquee{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="nav" id="nav">
+  <a class="brand" href="#top">
+    <span class="mark">S</span>
+    <span><b>SLT Academy</b><small>Team Building · Malaysia</small></span>
+  </a>
+  <div class="nav-links">
+    <a href="#themes">Experiences</a>
+    <a href="#why">Why us</a>
+    <a href="#how">How it works</a>
+    <a href="#enquire" class="btn btn-amber">Get a quote</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <video class="hero-video" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="posters/clip3.jpg">
+    <source src="videos/clip3.mp4" type="video/mp4">
+  </video>
+  <div class="hero-grade"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content">
+    <div class="eyebrow mono reveal d1">Destress Team Building · Malaysia · HRD Corp Claimable</div>
+    <h1 class="disp reveal d2">Switch off the stress. <span class="accent">Switch on the team.</span></h1>
+    <p class="lede reveal d3">Curated team-building experiences that pull your people out of the inbox and back to each other. Designed around your goals and run end to end by us.</p>
+    <div class="hero-cta reveal d4">
+      <a href="#enquire" class="btn btn-amber">Get a quote &rarr;</a>
+      <a href="#showreel" class="btn btn-ghost">Watch the showreel</a>
+    </div>
+  </div>
+</header>
+
+<!-- TRUST BAND (moved below hero per hero-stack discipline) -->
+<section class="trust-band" aria-label="Why teams choose SLT Academy">
+  <div class="wrap">
+    <div class="trust-grid">
+      <div class="t"><b>100% claimable</b><span>Structured to qualify under HRD Corp</span></div>
+      <div class="t"><b>Nationwide</b><span>Run anywhere in Malaysia</span></div>
+      <div class="t"><b>Done for you</b><span>We handle the whole day</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWREEL -->
+<section class="block showreel" id="showreel">
+  <div class="wrap">
+    <div class="obs">
+      <h2 class="h2">Real teams. Real days out. No stock photos.</h2>
+      <p class="sub">Every clip below is from an actual SLT Academy session. The laughter, the wins, the people who walked in as colleagues and left as a team.</p>
+    </div>
+    <div class="reel-grid obs">
+      <div class="reel-item reel-big">
+        <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="posters/clip2.jpg" aria-label="Group challenge in progress">
+          <source src="videos/clip2.mp4" type="video/mp4"></video>
+      </div>
+      <div class="reel-item reel-tall">
+        <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="posters/clip1.jpg" aria-label="Team up close">
+          <source src="videos/clip1.mp4" type="video/mp4"></video>
+      </div>
+      <div class="reel-item reel-wide">
+        <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="posters/clip4.jpg" aria-label="Winning the moment">
+          <source src="videos/clip4.mp4" type="video/mp4"></video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES (bento) -->
+<section class="block" id="themes">
+  <div class="wrap">
+    <div class="obs">
+      <div class="eyebrow mono">Experiences</div>
+      <h2 class="h2">Pick the energy. We build the day around it.</h2>
+    </div>
+    <div class="bento obs">
+      <div class="bcell photo span4">
+        <img src="photos/photo3.jpg" alt="A team relaxing together outdoors" loading="lazy" decoding="async">
+        <h3>Destress &amp; Wellness</h3>
+        <p>Slow it down. Nature, mindfulness and play that lets a burnt-out team actually exhale.</p>
+      </div>
+      <div class="bcell tint span2">
+        <h3>Outdoor Adventure</h3>
+        <p>High-energy challenges that turn quiet colleagues into a crew that has each other's backs.</p>
+      </div>
+      <div class="bcell solid span3">
+        <h3>Problem-Solving</h3>
+        <p>Indoor missions and games built to surface how your team really thinks and decides together.</p>
+      </div>
+      <div class="bcell solid span3">
+        <h3>Family &amp; Culture Day</h3>
+        <p>Big, inclusive celebrations that bring the whole company, and their families, together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="block why" id="why">
+  <div class="wrap split">
+    <div class="media obs"><img src="photos/photo2.jpg" alt="SLT Academy facilitators running a team-building day" loading="lazy" decoding="async"></div>
+    <div class="obs">
+      <h2 class="h2">The fun is the easy part. We handle the rest.</h2>
+      <div class="why-list">
+        <div class="row"><div class="key">01</div><div><h4>Fully HRD Corp claimable</h4><p>Structured to qualify, with the paperwork guided from quote to claim.</p></div></div>
+        <div class="row"><div class="key">02</div><div><h4>Designed for your team</h4><p>We start from your goals and group, not a fixed package off a shelf.</p></div></div>
+        <div class="row"><div class="key">03</div><div><h4>Run end to end</h4><p>Venue, facilitators, logistics and safety. You just bring the people.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY (sliding, the page's single marquee) -->
+<section class="block" id="gallery">
+  <div class="wrap">
+    <div class="obs">
+      <h2 class="h2">What a day with us looks like.</h2>
+      <p class="sub">A rolling look at the energy, from real SLT Academy team days. Hover to pause.</p>
+    </div>
+  </div>
+  <div class="marquee obs">
+    <div class="mtrack">
+      <figure class="mcard"><img src="photos/photo3.jpg" alt="Team building moment" loading="lazy" decoding="async"></figure>
+      <figure class="mcard"><img src="photos/photo1.jpg" alt="Team building moment" loading="lazy" decoding="async"></figure>
+      <figure class="mcard"><img src="photos/photo2.jpg" alt="Team building moment" loading="lazy" decoding="async"></figure>
+      <figure class="mcard" aria-hidden="true"><img src="photos/photo3.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="mcard" aria-hidden="true"><img src="photos/photo1.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="mcard" aria-hidden="true"><img src="photos/photo2.jpg" alt="" loading="lazy" decoding="async"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="block process" id="how">
+  <div class="wrap">
+    <div class="obs">
+      <div class="eyebrow mono">How it works</div>
+      <h2 class="h2">From first call to claim, four simple steps.</h2>
+    </div>
+    <div class="steps">
+      <div class="step obs"><div class="num">01</div><div><h3>Tell us your goals</h3><p>Team size, the date, the budget, and what you want people to walk away feeling.</p></div></div>
+      <div class="step obs"><div class="num">02</div><div><h3>We design the day</h3><p>You get a tailored proposal covering theme, activities, venue and timeline, plus the HRD Corp paperwork.</p></div></div>
+      <div class="step obs"><div class="num">03</div><div><h3>You show up</h3><p>Our facilitators run everything on the day. You are a guest at your own team event.</p></div></div>
+      <div class="step obs"><div class="num">04</div><div><h3>We help you claim</h3><p>Photos, reports and documentation handled so your HRD Corp claim is clean.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="block testi">
+  <div class="wrap obs">
+    <div class="stars" aria-label="Five out of five">★★★★★</div>
+    <p class="q">"Our team came back lighter, louder and genuinely closer. Best offsite we have ever run."</p>
+    <!-- TODO: replace with a real client name, title and company once approved. -->
+    <cite>[ Client name ], [ Title, Company ]</cite>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="block cta-final" id="enquire">
+  <div class="wrap obs">
+    <div class="cta-row">
+      <div>
+        <h2>Give your team a day they will talk about for months.</h2>
+        <p>Tell us your team size and goals. We will send a tailored, claimable proposal and a date that works.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="mailto:[your-email]" class="btn btn-amber">Request a proposal &rarr;</a>
+        <a href="https://wa.me/[your-number]" class="btn btn-ghost">Chat on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="yr"></span> SLT Academy · Destress Team Building</span>
+    <span>HRD Corp Claimable · Malaysia · <a href="mailto:[your-email]">[your-email]</a> · <a href="https://wa.me/[your-number]">WhatsApp</a></span>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+  // Scroll reveal via IntersectionObserver (no scroll listeners on every frame).
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.16});
+  document.querySelectorAll('.obs').forEach(el=>io.observe(el));
+
+  // Play videos only while in view (saves battery / decode work).
+  const vids=[...document.querySelectorAll('video')];
+  const vio=new IntersectionObserver((es)=>{es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.play().catch(()=>{})}else{v.pause()}})},{threshold:.2});
+  vids.forEach(v=>vio.observe(v));
+
+  function unlock(){vids.forEach(v=>{v.muted=true;const p=v.play();if(p)p.catch(()=>{});});}
+  ['touchstart','click','scroll'].forEach(ev=>addEventListener(ev,unlock,{once:true,passive:true}));
+  addEventListener('DOMContentLoaded',unlock);
+
+  document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
