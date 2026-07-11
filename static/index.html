@@ -209,6 +209,17 @@
   .foot-badges{display:flex;gap:14px;align-items:center;margin-bottom:26px}
   .foot-badges img{width:54px;height:54px;background:#fff;border-radius:50%;padding:5px;box-shadow:0 6px 18px rgba(0,0,0,.4)}
 
+  /* ============ OUR PROVEN PROCESS ============ */
+  .proven{background:var(--bg)}
+  .proven .split{align-items:start}
+  .proc-panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 34px;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+  .proc-stage{padding:32px 0;border-top:1px solid var(--line-soft)}
+  .proc-stage:first-child{border-top:none}
+  .proc-n{color:var(--accent);margin-bottom:12px}
+  .proc-stage h3{font-family:'Playfair Display',serif;font-weight:600;font-size:1.7rem;letter-spacing:-.01em;margin-bottom:10px}
+  .proc-stage p{color:var(--muted);font-size:.98rem;line-height:1.65;max-width:48ch}
+  @media(max-width:980px){ .proc-panel{padding:2px 22px} }
+
   /* ============ GALLERY ============ */
   .gallery{background:var(--bg)}
   .filmstrip{position:relative;margin-top:50px;overflow:hidden;
@@ -593,6 +604,35 @@
         <img src="badges/hrd-registered.png" alt="HRD Corp Registered Training Provider" width="88" height="88" loading="lazy" decoding="async">
         <img src="badges/hrd-claimable.png" alt="HRD Corp Claimable" width="88" height="88" loading="lazy" decoding="async">
         <span>HRD Corp Registered Training Provider &amp; Claimable</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR PROVEN PROCESS -->
+<section class="block proven" id="proven">
+  <div class="wrap split">
+    <div class="obs">
+      <div class="eyebrow mono">Our proven process</div>
+      <h2 class="h2">Connect. Learn. <em>Advance.</em></h2>
+      <p class="sub">Unlock your team's potential and drive organizational success with SLT Academy. Our expert-led training programs foster growth, enhance skills, and facilitate transformation, empowering your employees to excel.</p>
+      <p class="sub">Experience the benefits of professional development and a collaborative learning environment designed to propel your organization forward. Join us at SLT Academy today.</p>
+    </div>
+    <div class="proc-panel obs" data-d="1">
+      <div class="proc-stage">
+        <div class="proc-n mono">Stage 01</div>
+        <h3>Connect</h3>
+        <p>Engage in dynamic team-building activities designed to foster unity and promote effective communication. Participants immerse themselves in collaborative exercises that strengthen relationships and enhance interpersonal skills.</p>
+      </div>
+      <div class="proc-stage">
+        <div class="proc-n mono">Stage 02</div>
+        <h3>Learn</h3>
+        <p>Stay at the forefront of the digital age with our expert-led classroom learning sessions. Gain cutting-edge knowledge and skills that empower you to excel in today's rapidly evolving technological landscape.</p>
+      </div>
+      <div class="proc-stage">
+        <div class="proc-n mono">Stage 03</div>
+        <h3>Advance</h3>
+        <p>Empower individuals and organizations to achieve success through continuous learning and improvement. Foster a culture of growth and innovation that drives excellence and sustained advancement.</p>
       </div>
     </div>
   </div>
