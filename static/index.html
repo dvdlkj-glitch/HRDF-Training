@@ -173,6 +173,22 @@
   .exp p{color:#eef2ff;font-size:.9rem;max-width:30ch}
   .exp .tag{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:8px}
   .exp .tag::before{content:"";width:18px;height:1px;background:var(--accent)}
+  /* vibe preference poll */
+  .exp-vote{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .exp-pick{font-family:'Manrope',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.02em;color:#fff;background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:30px;padding:9px 15px;min-height:38px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .25s,border-color .25s,transform .2s;-webkit-tap-highlight-color:transparent}
+  .exp-pick::before{content:"";width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:8px solid var(--accent);transition:border-color .2s,transform .2s;flex:none}
+  .exp-pick:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-1px)}
+  .exp-pick:hover::before{border-bottom-color:#fff}
+  .exp-count{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.06em;color:var(--muted);white-space:nowrap;text-transform:uppercase}
+  .exp-count b{color:#fff;font-size:.92rem;font-weight:600}
+  .exp-bar{margin-top:11px;height:4px;border-radius:3px;background:rgba(255,255,255,.13);overflow:hidden;opacity:0;transition:opacity .5s}
+  .exp-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--amber-bright));border-radius:3px;transition:width .85s var(--ease)}
+  #expCards.has-voted .exp-bar{opacity:1}
+  #expCards.has-voted .exp-pick{pointer-events:none}
+  #expCards.has-voted .exp:not(.voted-choice) .exp-pick{background:rgba(255,255,255,.05);border-color:var(--line-soft);opacity:.55}
+  #expCards.has-voted .exp:not(.voted-choice) .exp-pick::before{border-bottom-color:var(--muted2)}
+  .exp.voted-choice .exp-pick{background:var(--accent);border-color:var(--accent)}
+  .exp.voted-choice .exp-pick::before{border-bottom-color:#fff}
   /* real frames pulled from actual SLT Academy event footage */
   .exp1 .bgimg{background-image:url("experiences/exp1.jpg")}
   .exp2 .bgimg{background-image:url("experiences/exp2.jpg")}
@@ -598,26 +614,34 @@
       <div class="eyebrow mono">Experiences</div>
       <h2 class="h2">Pick a vibe. <em>We build the day around it.</em></h2>
     </div>
-    <div class="cards">
+    <div class="cards" id="expCards">
       <div class="exp exp1 obs"><span class="bgimg" aria-hidden="true"></span><video class="exp-vid" muted loop playsinline webkit-playsinline preload="none" poster="experiences/exp1.jpg" data-lazyvid="expvid1.mp4" aria-hidden="true"></video>
         <div class="num">01</div><h3>Destress &amp; Wellness</h3>
         <p>Slow it down. Nature, mindfulness and play that lets a burnt-out team actually exhale.</p>
         <span class="tag">Low intensity</span>
+        <div class="exp-vote"><button class="exp-pick" data-vibe="destress" type="button"><span class="pick-lbl">Pick this vibe</span></button><span class="exp-count"><b data-count="destress">0</b> prefer</span></div>
+        <div class="exp-bar"><i data-bar="destress"></i></div>
       </div>
       <div class="exp exp2 obs" data-d="1"><span class="bgimg" aria-hidden="true"></span><video class="exp-vid" muted loop playsinline webkit-playsinline preload="none" poster="experiences/exp2.jpg" data-lazyvid="expvid2.mp4" aria-hidden="true"></video>
         <div class="num">02</div><h3>Outdoor Adventure</h3>
         <p>High-energy challenges that turn quiet colleagues into a crew that has each other's backs.</p>
         <span class="tag">High energy</span>
+        <div class="exp-vote"><button class="exp-pick" data-vibe="outdoor" type="button"><span class="pick-lbl">Pick this vibe</span></button><span class="exp-count"><b data-count="outdoor">0</b> prefer</span></div>
+        <div class="exp-bar"><i data-bar="outdoor"></i></div>
       </div>
       <div class="exp exp3 obs" data-d="2"><span class="bgimg" aria-hidden="true"></span><video class="exp-vid" muted loop playsinline webkit-playsinline preload="none" poster="experiences/exp3.jpg" data-lazyvid="expvid3.mp4" aria-hidden="true"></video>
         <div class="num">03</div><h3>Problem-Solving</h3>
         <p>Indoor missions and games built to surface how your team really thinks and decides together.</p>
         <span class="tag">Strategy</span>
+        <div class="exp-vote"><button class="exp-pick" data-vibe="problem" type="button"><span class="pick-lbl">Pick this vibe</span></button><span class="exp-count"><b data-count="problem">0</b> prefer</span></div>
+        <div class="exp-bar"><i data-bar="problem"></i></div>
       </div>
       <div class="exp exp4 obs" data-d="3"><span class="bgimg" aria-hidden="true"></span><video class="exp-vid" muted loop playsinline webkit-playsinline preload="none" poster="experiences/exp4.jpg" data-lazyvid="expvid4.mp4" aria-hidden="true"></video>
         <div class="num">04</div><h3>Family &amp; Culture Day</h3>
         <p>Big, inclusive celebrations that bring the whole company, and their families, together.</p>
         <span class="tag">All ages</span>
+        <div class="exp-vote"><button class="exp-pick" data-vibe="family" type="button"><span class="pick-lbl">Pick this vibe</span></button><span class="exp-count"><b data-count="family">0</b> prefer</span></div>
+        <div class="exp-bar"><i data-bar="family"></i></div>
       </div>
     </div>
   </div>
@@ -1137,6 +1161,50 @@
     }, {passive:true});
     tmAuto();
   }
+
+  /* ---------- EXPERIENCE VIBE POLL (Supabase) ---------- */
+  (function(){
+    var SB_URL='https://yeuldzzstlriqpbtmsip.supabase.co';
+    var SB_KEY='sb_publishable_GrKKuyqe2OYoldlgs8mrvw_QSPr7DyH';
+    var cards=document.getElementById('expCards');
+    if(!cards || !window.fetch) return;
+    var counts={destress:0,outdoor:0,problem:0,family:0};
+    var STORE='slt_pref_vibe';
+    var myVote=null; try{ myVote=localStorage.getItem(STORE); }catch(e){}
+    function hdr(){ return {'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'}; }
+    function render(){
+      var total=0, k; for(k in counts) total+=counts[k];
+      Object.keys(counts).forEach(function(v){
+        var b=cards.querySelector('[data-count="'+v+'"]'); if(b) b.textContent=counts[v];
+        var bar=cards.querySelector('i[data-bar="'+v+'"]'); if(bar) bar.style.width=(total>0?Math.round(counts[v]/total*100):0)+'%';
+      });
+      if(myVote){
+        cards.classList.add('has-voted');
+        var btn=cards.querySelector('.exp-pick[data-vibe="'+myVote+'"]');
+        if(btn){ btn.closest('.exp').classList.add('voted-choice'); var lbl=btn.querySelector('.pick-lbl'); if(lbl) lbl.textContent='✓ Your pick'; }
+      }
+    }
+    function load(){
+      fetch(SB_URL+'/rest/v1/slt_experience_votes?select=vibe,count',{headers:hdr()})
+        .then(function(r){return r.json();})
+        .then(function(rows){ if(rows&&rows.length) rows.forEach(function(row){ if(row.vibe in counts) counts[row.vibe]=row.count; }); render(); })
+        .catch(function(){ render(); });
+    }
+    function vote(vibe){
+      if(myVote || !(vibe in counts)) return;
+      myVote=vibe; try{ localStorage.setItem(STORE,vibe); }catch(e){}
+      counts[vibe]++; render();                       // optimistic
+      fetch(SB_URL+'/rest/v1/rpc/slt_cast_vote',{method:'POST',headers:hdr(),body:JSON.stringify({p_vibe:vibe})})
+        .then(function(r){return r.json();})
+        .then(function(n){ if(typeof n==='number'){ counts[vibe]=n; render(); } else { load(); } })
+        .catch(function(){});
+    }
+    cards.addEventListener('click', function(e){
+      var btn=e.target.closest('.exp-pick'); if(!btn) return;
+      e.preventDefault(); vote(btn.dataset.vibe);
+    });
+    load();
+  })();
 
   document.getElementById('yr').textContent=new Date().getFullYear();
 })();
