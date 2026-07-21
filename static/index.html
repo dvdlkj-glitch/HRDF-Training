@@ -3,19 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>SLT Academy · Teamwork. Triumph. Transform.</title>
-<meta name="description" content="SLT Academy is a distinguished HRD Corp certified training institution, delivering top-tier training and development tailored to the dynamic needs of individuals and enterprises across every sector. Kota Kinabalu, Sabah.">
+<title>SLT Academy · Transforming Teams into High-Performing Forces</title>
+<meta name="description" content="Purpose-driven team transformation and corporate training in Sabah, Malaysia. Fully HRD Corp claimable. We design performance-driven team experiences that align people, purpose, and results.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0a1130; --bg2:#0f1a44; --panel:#17224f;
-    --ink:#ffffff; --muted:#e6ebfa; --muted2:#c3cce6;
-    --amber:#f45800; --amber-bright:#ff7a33; --teal:#2f4a94;
-    --accent:var(--amber);            /* SLT Academy orange · swappable via Tweaks */
-    --accent-soft:rgba(244,88,0,.34);
-    --line:rgba(238,242,251,.13); --line-soft:rgba(238,242,251,.06);
+    /* SLT Company Profile 2026 palette — light theme */
+    --bg:#eef1f6; --bg2:#f7f9fc; --panel:#ffffff;
+    --ink:#1b2550; --muted:#586084; --muted2:#8791ad;
+    --amber:#e0531f; --amber-bright:#ff7a45; --teal:#2f4a94;
+    --blue:#2e6be6; --blue-bright:#5b8cf0;
+    --accent:var(--blue);             /* SLT royal blue */
+    --accent-soft:rgba(46,107,230,.16);
+    --line:rgba(27,37,80,.13); --line-soft:rgba(27,37,80,.06);
     --maxw:1200px;
     --ease:cubic-bezier(.2,.7,.2,1);
   }
@@ -224,6 +226,19 @@
   .creds span{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);max-width:18ch;line-height:1.7}
   .foot-badges{display:flex;gap:14px;align-items:center;margin-bottom:26px}
   .foot-badges img{width:54px;height:54px;background:#fff;border-radius:50%;padding:5px;box-shadow:0 6px 18px rgba(0,0,0,.4)}
+
+  /* ============ HRD CORP CERTIFICATION BANNER ============ */
+  .certification{position:relative;background:var(--bg2);overflow:hidden}
+  .certification::before{content:"";position:absolute;top:0;right:12%;width:24%;height:100%;background:linear-gradient(180deg,rgba(46,107,230,.16),rgba(46,107,230,.05));transform:skewX(-12deg);pointer-events:none}
+  .cert-wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.12fr .88fr;gap:56px;align-items:center}
+  .cert-h{font-family:'Manrope',sans-serif;font-weight:800;font-size:clamp(2.3rem,5vw,3.9rem);line-height:1.04;letter-spacing:-.02em;color:var(--accent);margin-bottom:24px}
+  .cert-h span{display:block}
+  .cert-lead{color:var(--ink);font-size:1.06rem;line-height:1.75;max-width:56ch}
+  .cert-lead strong{font-weight:700}
+  .cert-fine{margin-top:20px;color:var(--muted2);font-size:.82rem;font-style:italic}
+  .cert-badges{display:flex;gap:26px;align-items:center;justify-content:center;flex-wrap:wrap}
+  .cert-badges img{width:clamp(140px,19vw,200px);height:auto;filter:drop-shadow(0 16px 32px rgba(27,37,80,.2))}
+  @media(max-width:900px){ .cert-wrap{grid-template-columns:1fr;gap:32px;text-align:center} .cert-lead{margin-left:auto;margin-right:auto} .certification::before{right:-14%;width:64%} }
 
   /* ============ OUR PROVEN PROCESS ============ */
   .proven{background:var(--bg)}
@@ -464,6 +479,63 @@
   }
   body.noanim .grain,body.noanim .scanline{display:none}
   body.noanim .strip-track,body.noanim .band-track{animation-play-state:paused}
+
+  /* =========================================================
+     LIGHT THEME OVERRIDES — SLT Company Profile 2026
+     Content sections are light; video sections stay dark.
+     ========================================================= */
+  /* NAV: light text over the dark hero, dark once scrolled onto light content */
+  .nav .brand{color:#fff}
+  .nav-links a{color:rgba(255,255,255,.86)}
+  .nav-burger span{background:#fff}
+  .nav.scrolled{background:rgba(247,249,252,.92);border-bottom-color:var(--line)}
+  .nav.scrolled .brand{color:var(--ink)}
+  .nav.scrolled .brand small{color:var(--muted)}
+  .nav.scrolled .nav-links a{color:var(--muted)}
+  .nav.scrolled .nav-links a:hover{color:var(--accent)}
+  .nav.scrolled .nav-burger span{background:var(--ink)}
+  /* intro sting + mobile menu -> light */
+  .intro-sting{background:radial-gradient(120% 90% at 50% 40%,#ffffff,var(--bg) 72%)}
+  .mobile-menu{background:rgba(238,241,246,.97)}
+  /* HERO (dark video) keeps light text */
+  .hero-grade{background:linear-gradient(180deg,rgba(12,20,44,.5) 0%,rgba(12,20,44,.26) 34%,rgba(12,20,44,.82) 74%,#0c142c 100%)}
+  .hero h1{color:#fff}
+  .trust b{color:#fff}
+  .trust>div>span{color:rgba(255,255,255,.8)}
+  .scrollcue{color:rgba(255,255,255,.65)}
+  .hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.34)}
+  .hero .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.12)}
+  /* interstitial video band + final CTA (dark) keep light text */
+  .reel-cinema h2{color:#fff}
+  .cta-final .cta-grade{background:radial-gradient(80% 120% at 50% 0%,rgba(46,107,230,.4),transparent 55%),linear-gradient(180deg,#132352,#0c142c)}
+  .cta-final h2{color:#fff}
+  .cta-final .eyebrow{color:var(--blue-bright)}
+  .cta-final p{color:rgba(255,255,255,.86)}
+  .cta-final .btn-ghost{color:#fff;border-color:rgba(255,255,255,.34)}
+  .cta-final .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.12)}
+  /* experience cards are dark photo cards -> keep light text */
+  .exp h3{color:#fff}
+  .exp p{color:rgba(255,255,255,.82)}
+  .exp .tag{color:rgba(255,255,255,.75)}
+  .exp-count{color:rgba(255,255,255,.72)}
+  .exp-pick{border-color:rgba(255,255,255,.28)}
+  /* light-section accent labels + heading emphasis -> royal blue */
+  .eyebrow,.why-list .n,.step .num,.proc-n,.band-item .star{color:var(--accent)}
+  .adv-card .adv-n{color:var(--accent)}
+  .h2 em{color:var(--accent)}
+  /* testimonial stars -> orange; dots readable on light */
+  .tm-stars,.testi .stars,.stars{color:var(--amber)}
+  .tm-dot::before{background:rgba(27,37,80,.2)}
+  .tm-dot.active::before{background:var(--accent)}
+  .tm-nav{border-color:var(--line);color:var(--ink);background:#fff}
+  .tm-nav:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+  /* lightbox chrome stays light on its dark backdrop */
+  .lb-x,.lb-nav{color:#fff;border-color:rgba(255,255,255,.25)}
+  .lb-counter,.lb-cap{color:rgba(255,255,255,.7)}
+  /* soften shadows for light surfaces */
+  .adv-card:hover{box-shadow:0 22px 54px rgba(27,37,80,.15)}
+  .proc-panel{box-shadow:0 20px 50px rgba(27,37,80,.1)}
+  .shot{box-shadow:0 20px 44px rgba(27,37,80,.16)}
 </style>
 </head>
 <body>
@@ -474,7 +546,7 @@
     <span class="is-dot"></span>
     <div class="is-word"><span>SLT&nbsp;ACADEMY</span></div>
     <div class="is-rule"></div>
-    <div class="is-sub mono">Teamwork · Triumph · Transform</div>
+    <div class="is-sub mono">Purpose-Driven Team Transformation</div>
   </div>
   <span class="is-skip mono">Skip</span>
 </div>
@@ -483,7 +555,7 @@
 
 <!-- NAV -->
 <nav class="nav" id="nav">
-  <a class="brand" href="#top"><span class="dot"></span><span>SLT Academy<small>Teamwork · Triumph · Transform</small></span></a>
+  <a class="brand" href="#top"><span class="dot"></span><span>SLT Academy<small>Team Transformation · Sabah</small></span></a>
   <div class="nav-links">
     <a href="#themes">Experiences</a>
     <a href="#why">Who we are</a>
@@ -515,20 +587,20 @@
   <div class="hero-grade"></div>
   <div class="hero-tint"></div>
   <div class="hero-content wrap">
-    <div class="kicker mono stage d1">HRD Corp Certified Training Provider · Sabah</div>
+    <div class="kicker mono stage d1">Purpose-Driven Team Transformation · Sabah</div>
     <h1>
-      <span class="ln"><span class="l1">Teamwork. Triumph.</span></span>
-      <span class="ln"><span class="l2"><em>Transform.</em></span></span>
+      <span class="ln"><span class="l1">Transforming teams into</span></span>
+      <span class="ln"><span class="l2"><em>high-performing forces.</em></span></span>
     </h1>
-    <p class="lede stage d3">SLT Academy is a distinguished HRD Corp certified training institution, delivering top-tier training and development tailored to the dynamic needs of individuals and enterprises across every sector.</p>
+    <p class="lede stage d3">Purpose-driven team transformation and corporate training. We design performance-driven team experiences that align people, purpose, and results.</p>
     <div class="hero-cta stage d4">
       <a href="#enquire" class="btn btn-amber"><span class="sheen"></span>Book an appointment &rarr;</a>
       <a href="trailer.mp4" class="btn btn-ghost" data-lb="video" data-src="trailer.mp4">▸ Watch the trailer</a>
     </div>
     <div class="trust stage d5">
-      <div><b><span class="count" data-to="100">0</span>%</b><span>HRD Corp claimable</span></div>
-      <div><b>Certified</b><span>HRD Corp training provider</span></div>
-      <div><b>Sabah</b><span>Kota Kinabalu based</span></div>
+      <div><b><span class="count" data-to="50">0</span>+</b><span>Organisations served</span></div>
+      <div><b><span class="count" data-to="1000">0</span>+</b><span>Participants trained</span></div>
+      <div><b>100%</b><span>HRD Corp claimable</span></div>
     </div>
   </div>
 </header>
@@ -536,16 +608,16 @@
 <!-- MARQUEE BAND -->
 <div class="band" aria-hidden="true">
   <div class="band-track">
+    <span class="band-item">Purpose-Driven Transformation <span class="star">✦</span></span>
+    <span class="band-item">Sabah · Culture · Nature · Transformation <span class="star">✦</span></span>
+    <span class="band-item">50+ Organisations Served <span class="star">✦</span></span>
+    <span class="band-item">1000+ Participants Trained <span class="star">✦</span></span>
     <span class="band-item">HRD Corp Claimable <span class="star">✦</span></span>
-    <span class="band-item">Teamwork · Triumph · Transform <span class="star">✦</span></span>
-    <span class="band-item">Certified Training Provider <span class="star">✦</span></span>
-    <span class="band-item">Tailored Solutions <span class="star">✦</span></span>
-    <span class="band-item">Proven Excellence <span class="star">✦</span></span>
+    <span class="band-item">Purpose-Driven Transformation <span class="star">✦</span></span>
+    <span class="band-item">Sabah · Culture · Nature · Transformation <span class="star">✦</span></span>
+    <span class="band-item">50+ Organisations Served <span class="star">✦</span></span>
+    <span class="band-item">1000+ Participants Trained <span class="star">✦</span></span>
     <span class="band-item">HRD Corp Claimable <span class="star">✦</span></span>
-    <span class="band-item">Teamwork · Triumph · Transform <span class="star">✦</span></span>
-    <span class="band-item">Certified Training Provider <span class="star">✦</span></span>
-    <span class="band-item">Tailored Solutions <span class="star">✦</span></span>
-    <span class="band-item">Proven Excellence <span class="star">✦</span></span>
   </div>
 </div>
 
@@ -652,8 +724,8 @@
   <video id="cineVid" muted loop playsinline webkit-playsinline preload="none" poster="posters/clip2.jpg" data-lazyvid="hero.mp4" data-parallax="0.12"></video>
   <div class="cine-grade"></div>
   <div class="cine-in obs">
-    <h2>This is what <em>switching on</em><br>actually looks like.</h2>
-    <p class="cine-sub">Sound up. This is one afternoon with a team that arrived tired.</p>
+    <h2>Stronger teams. Clearer communication.<br><em>Better performance.</em></h2>
+    <p class="cine-sub">Sound up — purpose-driven team transformation, in one afternoon.</p>
   </div>
 </section>
 
@@ -666,17 +738,28 @@
     </div>
     <div class="obs" data-d="1">
       <div class="eyebrow mono">Who we are</div>
-      <h2 class="h2">A distinguished <em>HRD Corp certified</em> training institution.</h2>
+      <h2 class="h2">We help organisations transform teams into <em>aligned, high-performing units.</em></h2>
       <div class="why-list">
-        <div class="row"><div class="n">01</div><div><h4>Proven excellence</h4><p>Top-tier training and development, delivered by a certified institution trusted by individuals and enterprises across every sector.</p></div></div>
-        <div class="row"><div class="n">02</div><div><h4>Tailored solutions</h4><p>Programs shaped around the dynamic needs of your people and your organisation, never a fixed package off a shelf.</p></div></div>
-        <div class="row"><div class="n">03</div><div><h4>Partnership approach</h4><p>We work alongside you end to end, with an emphasis on growth, from first appointment to a clean HRD Corp claim.</p></div></div>
+        <div class="row"><div class="n">01</div><div><h4>Experiential learning</h4><p>Hands-on experiences that drive real engagement, not temporary excitement.</p></div></div>
+        <div class="row"><div class="n">02</div><div><h4>Behavioural insights</h4><p>Insights that build understanding and turn how your people work together into a genuine strength.</p></div></div>
+        <div class="row"><div class="n">03</div><div><h4>Strategic facilitation</h4><p>Professional facilitation that delivers lasting impact and aligns people, purpose, and results.</p></div></div>
       </div>
-      <div class="creds obs" data-d="2">
-        <img src="badges/hrd-registered.png" alt="HRD Corp Registered Training Provider" width="88" height="88" loading="lazy" decoding="async">
-        <img src="badges/hrd-claimable.png" alt="HRD Corp Claimable" width="88" height="88" loading="lazy" decoding="async">
-        <span>HRD Corp Registered Training Provider &amp; Claimable</span>
-      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HRD CORP CERTIFICATION -->
+<section class="block certification" id="certification">
+  <div class="wrap cert-wrap">
+    <div class="cert-copy obs">
+      <div class="eyebrow mono">Fully claimable</div>
+      <h2 class="cert-h">100% HRD Corp <span>Claimable</span></h2>
+      <p class="cert-lead"><strong>Maximize your team's potential using your HRD Corp contributions.</strong> We specialize in designing impactful learning experiences that are fully claimable under the HRDC scheme. Our team handles the heavy lifting by guiding you through the entire claims process, allowing you to focus on driving talent development and supporting Malaysia's workforce.</p>
+      <p class="cert-fine">*Only applicable when combined with a team-building program.</p>
+    </div>
+    <div class="cert-badges obs" data-d="1">
+      <img src="badges/hrd-registered.png" alt="HRD Corp Registered Training Provider" width="200" height="200" loading="lazy" decoding="async">
+      <img src="badges/hrd-claimable.png" alt="HRD Corp Claimable" width="200" height="200" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -685,33 +768,33 @@
 <section class="block advantages" id="advantages">
   <div class="wrap">
     <div class="obs adv-head">
-      <div class="eyebrow mono">Our advantages</div>
-      <h2 class="h2">Why choose <em>SLT Academy</em></h2>
+      <div class="eyebrow mono">Beyond team building</div>
+      <h2 class="h2">Real business <em>impact.</em></h2>
     </div>
     <div class="adv-grid">
       <article class="adv-card obs">
         <span class="adv-frame" aria-hidden="true"></span>
         <div class="adv-n mono">01</div>
-        <h3>Proven Excellence</h3>
-        <p>At SLT Academy, we consistently deliver high-quality training solutions that ensure client satisfaction. Our unwavering commitment to excellence has established us as a trusted leader in the industry. Through rigorous standards and innovative methodologies, we guarantee superior educational experiences that yield tangible results.</p>
+        <h3>Tailored to Your Organisation</h3>
+        <p>Custom programs built around your real challenges and business goals — never an off-the-shelf package.</p>
       </article>
       <article class="adv-card obs" data-d="1">
         <span class="adv-frame" aria-hidden="true"></span>
         <div class="adv-n mono">02</div>
-        <h3>Tailored Solutions</h3>
-        <p>We offer customized and curated training programs designed to meet your unique needs and objectives. By understanding the specific challenges and opportunities within your industry, we create bespoke solutions that align perfectly with your strategic goals. Our tailored approach ensures that our training is not only relevant but also highly effective in driving your business forward.</p>
+        <h3>Integrated Technical Learning</h3>
+        <p>We weave technical, performance-based learning — sales, leadership, financial and mental wellness — into every program.</p>
       </article>
       <article class="adv-card obs" data-d="1">
         <span class="adv-frame" aria-hidden="true"></span>
         <div class="adv-n mono">03</div>
-        <h3>Emphasis on Growth</h3>
-        <p>We are dedicated to fostering continuous learning and improvement for individuals and organizations. Our training sessions promote ongoing development, enabling participants to expand their skills and knowledge continually.</p>
+        <h3>Designed for Real Outcomes</h3>
+        <p>Measurable performance improvement, not temporary excitement — team building as a platform for real business performance.</p>
       </article>
       <article class="adv-card obs" data-d="2">
         <span class="adv-frame" aria-hidden="true"></span>
         <div class="adv-n mono">04</div>
-        <h3>Partnership Approach</h3>
-        <p>Partners, not customers. We take the time to understand your objectives and challenges, collaborating closely with you to drive impactful results. Our partnership approach ensures that our training solutions are seamlessly integrated into your organizational culture, leading to long-term success and meaningful transformation.</p>
+        <h3>Strategic Facilitation</h3>
+        <p>Guided debriefs and professional facilitation that turn shared experiences into lasting behavioural change.</p>
       </article>
     </div>
   </div>
@@ -721,26 +804,31 @@
 <section class="block proven" id="proven">
   <div class="wrap split">
     <div class="obs">
-      <div class="eyebrow mono">Our proven process</div>
-      <h2 class="h2">Connect. Learn. <em>Advance.</em></h2>
-      <p class="sub">Unlock your team's potential and drive organizational success with SLT Academy. Our expert-led training programs foster growth, enhance skills, and facilitate transformation, empowering your employees to excel.</p>
-      <p class="sub">Experience the benefits of professional development and a collaborative learning environment designed to propel your organization forward. Join us at SLT Academy today.</p>
+      <div class="eyebrow mono">Our approach</div>
+      <h2 class="h2">A strategic approach to <em>team transformation.</em></h2>
+      <p class="sub">We go beyond generic programs that ignore team dynamics. Every engagement is diagnosed, designed, facilitated and reinforced — turning shared experiences into measurable business results.</p>
+      <p class="sub">Stronger teams. Clearer communication. Better performance.</p>
     </div>
     <div class="proc-panel obs" data-d="1">
       <div class="proc-stage">
         <div class="proc-n mono">Stage 01</div>
-        <h3>Connect</h3>
-        <p>Engage in dynamic team-building activities designed to foster unity and promote effective communication. Participants immerse themselves in collaborative exercises that strengthen relationships and enhance interpersonal skills.</p>
+        <h3>Diagnose</h3>
+        <p>We diagnose your team's gaps and performance challenges before designing anything.</p>
       </div>
       <div class="proc-stage">
         <div class="proc-n mono">Stage 02</div>
-        <h3>Learn</h3>
-        <p>Stay at the forefront of the digital age with our expert-led classroom learning sessions. Gain cutting-edge knowledge and skills that empower you to excel in today's rapidly evolving technological landscape.</p>
+        <h3>Design</h3>
+        <p>We design customised, experiential programs aligned to your business goals.</p>
       </div>
       <div class="proc-stage">
         <div class="proc-n mono">Stage 03</div>
-        <h3>Advance</h3>
-        <p>Empower individuals and organizations to achieve success through continuous learning and improvement. Foster a culture of growth and innovation that drives excellence and sustained advancement.</p>
+        <h3>Facilitate</h3>
+        <p>We facilitate real behavioural change through guided, professional debriefs.</p>
+      </div>
+      <div class="proc-stage">
+        <div class="proc-n mono">Stage 04</div>
+        <h3>Reinforce</h3>
+        <p>We reinforce the learning through real application back in the workplace.</p>
       </div>
     </div>
   </div>
@@ -851,8 +939,8 @@
   <div class="cta-grade"></div>
   <div class="wrap obs">
     <div class="eyebrow mono" style="justify-content:center">Ready when you are</div>
-    <h2>Give your team a day <em>they'll talk about for months.</em></h2>
-    <p>Tell us your team size and goals, and we'll tailor a claimable program and a date that works. Book an appointment with SLT Academy today.</p>
+    <h2>Ready to transform your team into a <em>high-performing force?</em></h2>
+    <p>Tell us your goals and we'll design a purpose-driven, fully HRD Corp-claimable program aligned to real business outcomes. Book an appointment with SLT Academy today.</p>
     <div class="row">
       <a href="mailto:sltacademy@outlook.com" class="btn btn-amber"><span class="sheen"></span>Book an appointment &rarr;</a>
       <a href="tel:+601153738818" class="btn btn-ghost">Call 011-5373 8818</a>
@@ -866,7 +954,7 @@
     <img src="badges/hrd-claimable.png" alt="HRD Corp Claimable" width="54" height="54" loading="lazy" decoding="async">
   </div>
   <div class="wrap foot">
-    <span>© <span id="yr"></span> SLT Academy · Teamwork · Triumph · Transform</span>
+    <span>© <span id="yr"></span> SLT Academy · Purpose-Driven Team Transformation · 202404000841 (LLP0038325-LGN)</span>
     <span>Lot 28, 1st Floor, Block C, Damai Point, 88300 Kota Kinabalu, Sabah · 011-5373 8818 · <a href="mailto:sltacademy@outlook.com">sltacademy@outlook.com</a></span>
   </div>
 </footer>
