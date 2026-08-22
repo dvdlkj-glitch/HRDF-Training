@@ -102,9 +102,11 @@
   .hero-content{position:relative;z-index:7;width:100%;padding-bottom:11vh}
   .kicker{color:#fff;margin-bottom:22px;display:inline-flex;align-items:center;gap:12px}
   .kicker::before{content:"";width:30px;height:1px;background:var(--accent)}
-  .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.5rem,8.4vw,6.6rem);line-height:.98;letter-spacing:-.022em;max-width:15ch;margin-bottom:26px}
-  .hero h1 .ln{display:block;overflow:hidden}
-  .hero h1 .ln span{display:block;transform:translateY(110%)}
+  .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.5rem,8.4vw,6.6rem);line-height:1.06;letter-spacing:-.022em;max-width:15ch;margin-bottom:26px}
+  /* padding+negative margin extends the clip box so italic descenders (g, p, y)
+     are not cut by the line-reveal overflow, without changing layout spacing */
+  .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.16em;margin-bottom:-.16em}
+  .hero h1 .ln span{display:block;transform:translateY(135%)}
   .hero h1 em{font-style:italic;font-weight:400;color:#fff}
   .hero p.lede{font-size:clamp(1rem,1.5vw,1.24rem);color:#eef2ff;max-width:54ch;margin-bottom:36px}
   .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
@@ -123,7 +125,7 @@
   .d1{animation-delay:.05s}.d2{animation-delay:.22s}.d3{animation-delay:.4s}.d4{animation-delay:.58s}.d5{animation-delay:.74s}
   .l1{animation-delay:.18s}.l2{animation-delay:.34s}
   @keyframes up{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes lineUp{from{transform:translateY(110%)}to{transform:translateY(0)}}
+  @keyframes lineUp{from{transform:translateY(135%)}to{transform:translateY(0)}}
 
   /* ============ MARQUEE BAND ============ */
   .band{border-block:1px solid var(--line);background:var(--bg2);overflow:hidden;padding:18px 0}
