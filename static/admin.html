@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>SLT Academy — Edit Website Wording</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#eef1f6;--panel:#fff;--ink:#1b2550;--muted:#586084;--blue:#2e6be6;--orange:#e0531f;--line:rgba(27,37,80,.14);--ok:#12805c;--err:#c02626}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.5;padding-bottom:120px}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px}
+  header{background:var(--ink);color:#fff;padding:22px 0;margin-bottom:26px}
+  header h1{font-size:1.25rem;font-weight:800;letter-spacing:-.01em}
+  header p{color:#c3cce6;font-size:.86rem;margin-top:4px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:18px}
+  .card h2{font-size:1.02rem;font-weight:800;color:var(--blue);margin-bottom:4px}
+  .card .hint{font-size:.82rem;color:var(--muted);margin-bottom:14px}
+  label{display:block;font-size:.78rem;font-weight:700;color:var(--muted);margin:14px 0 5px}
+  input[type=text],input[type=password],textarea{width:100%;font-family:inherit;font-size:.94rem;color:var(--ink);
+    background:#fbfcfe;border:1px solid var(--line);border-radius:8px;padding:10px 12px;resize:vertical}
+  input:focus,textarea:focus{outline:none;border-color:var(--blue);background:#fff}
+  textarea{min-height:74px;line-height:1.55}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .btn{font-family:inherit;font-weight:700;font-size:.92rem;border:none;border-radius:8px;padding:12px 20px;cursor:pointer;transition:.2s}
+  .btn-primary{background:var(--orange);color:#fff}
+  .btn-primary:hover{filter:brightness(1.07)}
+  .btn-primary:disabled{opacity:.5;cursor:not-allowed}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--ink)}
+  .savebar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);
+    box-shadow:0 -6px 24px rgba(27,37,80,.09);padding:14px 0;z-index:20}
+  .savebar .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .status{font-size:.86rem;font-weight:600}
+  .status.ok{color:var(--ok)} .status.err{color:var(--err)} .status.busy{color:var(--muted)}
+  .warn{background:#fff8e6;border:1px solid #f0d089;color:#7a5300;border-radius:8px;padding:12px 14px;font-size:.84rem;margin-top:12px}
+  details summary{cursor:pointer;font-weight:700;font-size:.9rem;color:var(--blue);padding:4px 0}
+  .grp{display:none}
+  .grp.open{display:block}
+  .toggle{width:100%;text-align:left;background:none;border:none;font:inherit;font-weight:800;font-size:1.02rem;
+    color:var(--blue);cursor:pointer;padding:0;display:flex;justify-content:space-between;align-items:center}
+  .toggle span.count{font-size:.75rem;color:var(--muted);font-weight:600}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>SLT Academy — Website Wording Editor</h1>
+    <p>Change the text on the website. Videos, photos and layout are not affected.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="card">
+    <h2>1. Access key</h2>
+    <div class="hint">Paste the GitHub access key once. It is stored only in this browser, never on the website.</div>
+    <input type="password" id="token" placeholder="ghp_… or github_pat_…" autocomplete="off">
+    <div class="row" style="margin-top:10px">
+      <label style="margin:0;display:flex;align-items:center;gap:7px;font-weight:600;color:var(--ink)">
+        <input type="checkbox" id="remember" checked style="width:auto"> Remember on this device
+      </label>
+    </div>
+    <div class="warn">Keep this key private — anyone with it can change the website. If it leaks, delete it in GitHub → Settings → Developer settings → Tokens.</div>
+  </div>
+
+  <div id="form"></div>
+</div>
+
+<div class="savebar">
+  <div class="wrap">
+    <div class="row">
+      <button class="btn btn-primary" id="save">Update Website</button>
+      <button class="btn btn-ghost" id="reset">Restore original wording</button>
+    </div>
+    <div class="status busy" id="status">Loading…</div>
+  </div>
+</div>
+
+<script src="cms-fields.js"></script>
+<script src="cms.js"></script>
+<script>
+(function () {
+  var OWNER = 'dvdlkj-glitch', REPO = 'HRDF-Training', BRANCH = 'main', PATH = 'static/content.json';
+  var API = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + PATH;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var statusEl = $('status'), formEl = $('form'), tokenEl = $('token');
+  var defaults = {}, current = {}, inputs = {};
+
+  function setStatus(msg, cls) { statusEl.textContent = msg; statusEl.className = 'status ' + (cls || 'busy'); }
+
+  /* every field can produce one or two editable rows */
+  function rowsFor(f) {
+    if (f.t === 'emlast')  { return [{ k: f.k, l: f.l }, { k: f.k + '.em', l: f.l + ' — coloured highlight' }]; }
+    if (f.t === 'spanlast'){ return [{ k: f.k, l: f.l }, { k: f.k + '.span', l: f.l + ' — second line' }]; }
+    if (f.t === 'boldfirst'){ return [{ k: f.k + '.b', l: f.l + ' — bold start' }, { k: f.k, l: f.l + ' — rest' }]; }
+    return [{ k: f.k, l: f.l }];
+  }
+
+  function build() {
+    var groups = [], seen = {};
+    window.CMS_FIELDS.forEach(function (f) {
+      if (!seen[f.g]) { seen[f.g] = []; groups.push(f.g); }
+      rowsFor(f).forEach(function (r) { seen[f.g].push(r); });
+    });
+
+    formEl.innerHTML = '';
+    groups.forEach(function (g, gi) {
+      var card = document.createElement('div'); card.className = 'card';
+      var btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'toggle';
+      btn.innerHTML = g + ' <span class="count">' + seen[g].length + ' items ▾</span>';
+      var box = document.createElement('div');
+      box.className = 'grp' + (gi === 0 ? ' open' : '');
+      btn.onclick = function () { box.classList.toggle('open'); };
+      card.appendChild(btn); card.appendChild(box);
+
+      seen[g].forEach(function (r) {
+        var val = current[r.k] != null ? current[r.k] : '';
+        var lab = document.createElement('label'); lab.textContent = r.l;
+        var el = (String(val).length > 60)
+          ? document.createElement('textarea')
+          : Object.assign(document.createElement('input'), { type: 'text' });
+        el.value = val;
+        box.appendChild(lab); box.appendChild(el);
+        inputs[r.k] = el;
+      });
+      formEl.appendChild(card);
+    });
+  }
+
+  function collect() {
+    var out = {};
+    Object.keys(inputs).forEach(function (k) { out[k] = inputs[k].value; });
+    return out;
+  }
+
+  function b64(str) {
+    var bytes = new TextEncoder().encode(str), bin = '';
+    bytes.forEach(function (b) { bin += String.fromCharCode(b); });
+    return btoa(bin);
+  }
+
+  /* defaults come from the page itself, so the editor always matches the site */
+  function load() {
+    setStatus('Loading current wording…', 'busy');
+    fetch('index.html?v=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.text(); })
+      .then(function (html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        defaults = window.CMS.extract(doc);
+        return fetch('content.json?v=' + Date.now(), { cache: 'no-store' })
+          .then(function (r) { return r.ok ? r.json() : {}; })
+          .catch(function () { return {}; });
+      })
+      .then(function (saved) {
+        current = Object.assign({}, defaults, saved || {});
+        build();
+        setStatus('Ready — edit any text, then press Update Website.', 'ok');
+      })
+      .catch(function (e) { setStatus('Could not load the page text: ' + e.message, 'err'); });
+  }
+
+  $('reset').onclick = function () {
+    if (!confirm('Put every field back to the original wording? Nothing is published until you press Update Website.')) { return; }
+    Object.keys(inputs).forEach(function (k) { inputs[k].value = defaults[k] != null ? defaults[k] : ''; });
+    setStatus('Original wording restored in the form — press Update Website to publish it.', 'ok');
+  };
+
+  $('save').onclick = function () {
+    var token = tokenEl.value.trim();
+    if (!token) { setStatus('Please paste your access key first.', 'err'); tokenEl.focus(); return; }
+    if ($('remember').checked) { try { localStorage.setItem('slt_gh_token', token); } catch (e) {} }
+
+    var btn = this; btn.disabled = true;
+    setStatus('Publishing…', 'busy');
+    var body = JSON.stringify(collect(), null, 2);
+    var head = { Authorization: 'Bearer ' + token, Accept: 'application/vnd.github+json' };
+
+    fetch(API + '?ref=' + BRANCH, { headers: head, cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (info) {
+        var payload = { message: 'Update website wording', content: b64(body), branch: BRANCH };
+        if (info && info.sha) { payload.sha = info.sha; }
+        return fetch(API, { method: 'PUT', headers: head, body: JSON.stringify(payload) });
+      })
+      .then(function (r) {
+        if (r.ok) {
+          setStatus('Published. The website updates in about 1–2 minutes.', 'ok');
+        } else {
+          return r.json().then(function (e) {
+            throw new Error((e && e.message) || ('HTTP ' + r.status));
+          });
+        }
+      })
+      .catch(function (e) { setStatus('Could not publish: ' + e.message, 'err'); })
+      .then(function () { btn.disabled = false; });
+  };
+
+  try {
+    var t = localStorage.getItem('slt_gh_token');
+    if (t) { tokenEl.value = t; }
+  } catch (e) {}
+
+  load();
+})();
+</script>
+</body>
+</html>
