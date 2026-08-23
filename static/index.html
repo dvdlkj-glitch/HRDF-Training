@@ -578,6 +578,31 @@
   .adv-card:hover{box-shadow:0 22px 54px rgba(27,37,80,.15)}
   .proc-panel{box-shadow:0 20px 50px rgba(27,37,80,.1)}
   .shot{box-shadow:0 20px 44px rgba(27,37,80,.16)}
+
+  /* ============ FEATURE FILM (Mount Kinabalu) ============ */
+  .filmfeature{background:var(--bg2)}
+  .film-head{text-align:center;margin-bottom:44px}
+  .film-head .eyebrow{justify-content:center}
+  .film-head .eyebrow::before{display:none}
+  .film-head .h2{margin-left:auto;margin-right:auto;max-width:22ch}
+  .film-head .sub{margin-left:auto;margin-right:auto;text-align:center}
+  .film-frame{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);
+    background:#0c142c;box-shadow:0 30px 70px rgba(27,37,80,.18);aspect-ratio:16/9;margin:0}
+  .film-frame video{width:100%;height:100%;object-fit:cover;display:block}
+  .film-play{position:absolute;inset:0;width:100%;height:100%;border:none;cursor:pointer;padding:0;
+    background:linear-gradient(180deg,rgba(12,20,44,.22),rgba(12,20,44,.55));
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+    transition:opacity .45s var(--ease)}
+  .film-play.hide{opacity:0;pointer-events:none}
+  .film-play i{width:78px;height:78px;border-radius:50%;background:var(--accent);display:flex;
+    align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(46,107,230,.55);
+    transition:transform .3s var(--ease)}
+  .film-play i::before{content:"";width:0;height:0;border-left:24px solid #fff;
+    border-top:15px solid transparent;border-bottom:15px solid transparent;margin-left:7px}
+  .film-play:hover i{transform:scale(1.09)}
+  .film-play span{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.2em;
+    text-transform:uppercase;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.55)}
+  @media(max-width:640px){ .film-play i{width:58px;height:58px} .film-play i::before{border-left-width:18px} }
 </style>
 </head>
 <body>
@@ -790,6 +815,26 @@
         <div class="row"><div class="n">03</div><div><h4>Strategic facilitation</h4><p>Professional facilitation that delivers lasting impact and aligns people, purpose, and results.</p></div></div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- FEATURE FILM: MOUNT KINABALU -->
+<section class="block filmfeature" id="film">
+  <div class="wrap">
+    <div class="obs film-head">
+      <div class="eyebrow mono">Sabah &middot; Mount Kinabalu</div>
+      <h2 class="h2">Team transformation, <em>above the clouds.</em></h2>
+      <p class="sub">Maragang Hill, 2,232 metres, in the shadow of Mount Kinabalu. This is what a day with SLT Academy looks like &mdash; from the trail head to the summit.</p>
+    </div>
+    <figure class="film-frame obs">
+      <video id="filmVid" data-manual poster="posters/kinabalu-film.jpg" preload="none" playsinline webkit-playsinline controls>
+        <source src="kinabalu-film.mp4" type="video/mp4">
+      </video>
+      <button class="film-play" id="filmPlay" type="button" aria-label="Play the film">
+        <i aria-hidden="true"></i>
+        <span>Watch the film</span>
+      </button>
+    </figure>
   </div>
 </section>
 
@@ -1154,13 +1199,13 @@
       else{ v.pause(); }
     });
   }, {threshold:.25});
-  document.querySelectorAll('video').forEach(function(v){ vio.observe(v); });
+  document.querySelectorAll('video:not([data-manual])').forEach(function(v){ vio.observe(v); });
   // experience cards: reveal the motion once it actually starts playing
   document.querySelectorAll('.exp-vid').forEach(function(v){
     v.addEventListener('playing', function(){ v.classList.add('on'); });
   });
   // ensure hero plays after gesture (mobile autoplay safety)
-  function unlock(){ document.querySelectorAll('video').forEach(function(v){ v.muted=true; if(v.dataset.lazyvid)lazyLoad(v); }); var hv=document.getElementById('heroVid'); if(hv){var p=hv.play();if(p)p.catch(function(){});} }
+  function unlock(){ document.querySelectorAll('video:not([data-manual])').forEach(function(v){ v.muted=true; if(v.dataset.lazyvid)lazyLoad(v); }); var hv=document.getElementById('heroVid'); if(hv){var p=hv.play();if(p)p.catch(function(){});} }
   ['touchstart','click','scroll'].forEach(function(ev){ addEventListener(ev, unlock, {once:true, passive:true}); });
 
   /* ---------- PARALLAX ---------- */
@@ -1379,6 +1424,17 @@
     });
     load();
   })();
+
+  /* ---------- FEATURE FILM (plays with sound on click) ---------- */
+  var fVid=document.getElementById('filmVid'), fBtn=document.getElementById('filmPlay');
+  if(fVid&&fBtn){
+    fBtn.addEventListener('click',function(){
+      fBtn.classList.add('hide');
+      fVid.muted=false; fVid.volume=1;      // undo any global mute
+      var p=fVid.play(); if(p)p.catch(function(){});
+    });
+    fVid.addEventListener('ended',function(){ fVid.currentTime=0; fBtn.classList.remove('hide'); });
+  }
 
   document.getElementById('yr').textContent=new Date().getFullYear();
 })();
